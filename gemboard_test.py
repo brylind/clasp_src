@@ -18,19 +18,15 @@ from scipy.fft import rfft, rfftfreq
 i2c = busio.I2C(board.SCL, board.SDA, frequency = 1000000)
 
 ads = ADS.ADS1115(i2c)
-ads.data_rate = 8
+ads.data_rate = 475
 ads.gain = 1
 ads.mode = Mode.CONTINUOUS
 
-
 #change data_rate and gain if using ADS1115 package (should be)
 # also investiage PGA (making custom gain based on analog input we havee
-
-
 #adc.mode = Mode.CONTINUOUS   BW
-chan = AnalogIn(ads, ADS.P0, ADS.P1) #differential voltage   BW
-s = 50.0 # seconds of recording
-
+chan = AnalogIn(ads, ADS.P0, ADS.P1) #differential voltage, channels 0 & 1 specified by JFA on his Github
+s = 25.0 # seconds of recording
 
 launch_time = datetime.datetime.now()
 #timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
@@ -48,10 +44,10 @@ while act_duration < s:
 	print(time(), chan.voltage)
 	dat.append([time(), chan.voltage])
 	act_duration = time_oftrial
-	sleep(.001)
+	sleep(.0001)
 data = pd.DataFrame(dat,columns = ['Time','Signal'])
 print(data)
-#data.to_csv("testing_GLENDA2mic.csv",header=['Time (s)','Signal (s)'])
+data.to_csv("testingmic.csv",header=['Time (s)','Signal (V)'])
 
 # the rest of this is for printing natively in Python if needed (I don't use this really)
 #print(data)
