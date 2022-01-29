@@ -18,7 +18,7 @@ from scipy.fft import rfft, rfftfreq
 i2c = busio.I2C(board.SCL, board.SDA, frequency = 1000000)
 
 ads = ADS.ADS1115(i2c)
-ads.data_rate = 475
+ads.data_rate = 240
 ads.gain = 1
 ads.mode = Mode.CONTINUOUS
 
@@ -26,7 +26,7 @@ ads.mode = Mode.CONTINUOUS
 # also investiage PGA (making custom gain based on analog input we havee
 #adc.mode = Mode.CONTINUOUS   BW
 chan = AnalogIn(ads, ADS.P0, ADS.P1) #differential voltage, channels 0 & 1 specified by JFA on his Github
-s = 25.0 # seconds of recording
+s = 300 # seconds of recording
 
 launch_time = datetime.datetime.now()
 #timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
