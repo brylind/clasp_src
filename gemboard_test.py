@@ -61,6 +61,7 @@ data.to_csv("testingmic.csv",header=['Time (s)','Signal (V)'])
 #sample_rate = len_time/last_time
 #N = int(sample_rate * last_time)
 
+
 #yf = rfft(sig_BL)
 #xf = rfftfreq(N, 1/sample_rate)
 
@@ -73,3 +74,5 @@ data.to_csv("testingmic.csv",header=['Time (s)','Signal (V)'])
 #plt.plot(xf, np.abs(yf))
 #plt.grid()
 #plt.show()
+
+
