@@ -18,7 +18,7 @@ from scipy.fft import rfft, rfftfreq
 i2c = busio.I2C(board.SCL, board.SDA, frequency = 1000000)
 
 ads = ADS.ADS1115(i2c)
-ads.data_rate = 250
+ads.data_rate = 475
 ads.gain = 1
 ads.mode = Mode.CONTINUOUS
 
@@ -44,7 +44,7 @@ while act_duration < s:
 	print(time(), chan.voltage)
 	dat.append([time(), chan.voltage])
 	act_duration = time_oftrial
-	sleep(.0001)
+	sleep(0.004)		# sleep set to make a sampling rate of 1/.004 = 250
 data = pd.DataFrame(dat,columns = ['Time','Signal'])
 print(data)
 data.to_csv("testingmic.csv",header=['Time (s)','Signal (V)'])
