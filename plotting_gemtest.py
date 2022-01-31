@@ -30,4 +30,7 @@ plt.semilogx(xf[200:-1], np.abs(yf[200:-1]))
 #plt.plot(xf[100:-1], np.abs(yf)[100:-1])
 plt.grid()
 plt.show()
+
+# does this show?
+
 os.system('cd ~/Documents/Github/GLINDA2_testing; git add .; git commit -m "auto push from Pycharm code"; git push')
