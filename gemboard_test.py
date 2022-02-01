@@ -1,5 +1,6 @@
 # Mic Recording Script
 #HEY BRYCE!
+import os
 
 from adafruit_ads1x15.analog_in import AnalogIn
 from adafruit_ads1x15.ads1x15 import Mode
@@ -49,30 +50,6 @@ data = pd.DataFrame(dat,columns = ['Time','Signal'])
 print(data)
 data.to_csv("testingmic.csv",header=['Time (s)','Signal (V)'])
 
-# the rest of this is for printing natively in Python if needed (I don't use this really)
-#print(data)
-#time_BL = data['Time'].values
-#sig_BL_ugly = data['Signal'].values
-#sig_BL = sig_BL_ugly - np.mean(sig_BL_ugly)
-#len_time = len(time_BL)
-
-
-#last_time = time_BL[len_time-1]
-#sample_rate = len_time/last_time
-#N = int(sample_rate * last_time)
-
-
-#yf = rfft(sig_BL)
-#xf = rfftfreq(N, 1/sample_rate)
-
-#plt.plot(time_BL, sig_BL_ugly)
-#plt.show()
-
-#plt.plot(time_BL, sig_BL)
-#plt.show()
-
-#plt.plot(xf, np.abs(yf))
-#plt.grid()
-#plt.show()
+os.system('cd Documents/glinda2_proto/gitcodes; git add .; git commit -m "autopush data from pi"; git push')
 
 
