@@ -26,7 +26,7 @@ xf = rfftfreq(N, 1/sample_rate)
 plt.plot(time,signal)
 plt.show()
 
-plt.semilogx(xf[200:-1], np.abs(yf[200:-1]))
+plt.semilogx(xf, np.abs(yf))
 #plt.plot(xf[100:-1], np.abs(yf)[100:-1])
 plt.grid()
 plt.show()
