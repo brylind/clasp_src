@@ -50,6 +50,6 @@ data = pd.DataFrame(dat,columns = ['Time','Signal'])
 print(data)
 data.to_csv("testingmic.csv",header=['Time (s)','Signal (V)'])
 
-os.system('cd Documents/glinda2_proto/gitcodes; git add .; git commit -m "autopush data from pi"; git push')
+os.system('cd Documents/glinda2_proto/gitcodes; git add testingmic.csv; git commit -m "autopush data from pi"; git push')
 
 
