@@ -46,7 +46,7 @@ while (time()-start) < s:
 	#print(time(), chan.voltage)	# this printing statement slow the code WAAAAY too much
 	dat.append([time(), chan.voltage])
 	#act_duration = time()-start
-	sleep(0.004)		# sleep set to make a sampling rate of 1/.004 = 250
+	sleep(0.0025)		# sleep set to make a sampling rate of 1/.004 = 250
 data = pd.DataFrame(dat,columns = ['Time','Signal'])
 print(data)
 data.to_csv("testingmic.csv",header=['Time (s)','Signal (V)'])
