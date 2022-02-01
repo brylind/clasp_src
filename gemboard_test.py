@@ -16,7 +16,8 @@ import matplotlib.pyplot as plt
 
 from scipy.fft import rfft, rfftfreq
 
-i2c = busio.I2C(board.SCL, board.SDA, frequency = 1000000)
+#i2c = busio.I2C(board.SCL, board.SDA, frequency = 1000000)
+i2c = busio.I2C(board.SCL, board.SDA)   # I'm using this line instead after setting the baudrate manually in /boot/config.txt
 
 ads = ADS.ADS1115(i2c)
 ads.data_rate = 475
