@@ -41,7 +41,7 @@ act_duration = 0.0000
 
 while act_duration < s:
 	time_oftrial = time()-start
-	print(time(), chan.voltage)
+	#print(time(), chan.voltage)
 	dat.append([time(), chan.voltage])
 	act_duration = time_oftrial
 	sleep(0.004)		# sleep set to make a sampling rate of 1/.004 = 250

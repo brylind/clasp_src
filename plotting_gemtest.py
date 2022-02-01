@@ -21,7 +21,7 @@ N = int(len(time))
 sample_rate = len(time)/(lasttime - firsttime)
 
 yf = rfft(signal)
-xf = rfftfreq(N, sample_rate)
+xf = rfftfreq(N, 1/sample_rate)
 
 plt.plot(time,signal)
 plt.show()
