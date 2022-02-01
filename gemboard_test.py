@@ -36,15 +36,15 @@ dat = []
 #looptime = time()
     #try:
 print('Reading...\n')
-start = time()
-act_duration = 0.0000
 
-while act_duration < s:
-	time_oftrial = time()-start
+act_duration = 0.0000
+start = time()
+
+while (time()-start) < s:
 	#print(time(), chan.voltage)
 	dat.append([time(), chan.voltage])
-	act_duration = time_oftrial
-	sleep(0.004)		# sleep set to make a sampling rate of 1/.004 = 250
+	#act_duration = time()-start
+	#sleep(0.004)		# sleep set to make a sampling rate of 1/.004 = 250
 data = pd.DataFrame(dat,columns = ['Time','Signal'])
 print(data)
 data.to_csv("testingmic.csv",header=['Time (s)','Signal (V)'])
