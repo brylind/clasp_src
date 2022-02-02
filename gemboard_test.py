@@ -18,7 +18,7 @@ i2c = busio.I2C(board.SCL, board.SDA)   # I'm using this line instead after sett
 ads = ADS.ADS1115(i2c)
 ads.data_rate = 475
 ads.gain = 1
-#ads.mode = Mode.CONTINUOUS
+ads.mode = Mode.CONTINUOUS
 
 chan = AnalogIn(ads, ADS.P0, ADS.P1) #differential voltage, channels 0 & 1 specified by JFA on his Github
 
