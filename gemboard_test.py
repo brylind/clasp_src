@@ -12,21 +12,14 @@ import board
 import busio
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 
-from scipy.fft import rfft, rfftfreq
-
-#i2c = busio.I2C(board.SCL, board.SDA, frequency = 1000000)
 i2c = busio.I2C(board.SCL, board.SDA)   # I'm using this line instead after setting the baudrate manually in /boot/config.txt
 
 ads = ADS.ADS1115(i2c)
 ads.data_rate = 475
 ads.gain = 1
-ads.mode = Mode.CONTINUOUS
+#ads.mode = Mode.CONTINUOUS
 
-#change data_rate and gain if using ADS1115 package (should be)
-# also investiage PGA (making custom gain based on analog input we havee
-#adc.mode = Mode.CONTINUOUS   BW
 chan = AnalogIn(ads, ADS.P0, ADS.P1) #differential voltage, channels 0 & 1 specified by JFA on his Github
 
 
