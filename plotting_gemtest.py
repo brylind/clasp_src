@@ -36,3 +36,4 @@ plt.show()
 # does this show?
 
 #os.system('cd ~/Documents/Github/GLINDA2_testing; git add .; git commit -m "auto push from Pycharm code"; git push')
+
