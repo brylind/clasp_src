@@ -31,6 +31,7 @@ dat = []
 #looptime = time()
     #try:
 
+sleep(5)
 s = 30 # seconds of recording
 launch_time = datetime.datetime.now()
 print(f'Start time = {launch_time} \n Duration = {s}s \n Reading...\n')
