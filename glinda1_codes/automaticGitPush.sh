@@ -7,7 +7,7 @@ while true; do
     # mtime +1 --> "modified time" is more than 1 day ago
     # The argument is called daystart - googling "linux daystart" helps
     # type "man find" for more info.. this line is just deleting data modified more than a day ago
-    sudo find /home/pi/infrasound/dataFiles -mtime +1 -delete
+    sudo find /home/pi/infrasound/dataFiles -mtime +2 -delete
 
     #----------- Bryces addition (this needs to be tested) -------------
     ## remove older files

@@ -1,7 +1,7 @@
 import socket
 hostname = socket.gethostname()
 s1 = 'HOSTNAME:'
-print(s1,hostname)
+print(s1, hostname)
 
 import getpass
 username = getpass.getuser()

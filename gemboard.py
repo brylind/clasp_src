@@ -20,25 +20,27 @@ ads.data_rate = 475
 ads.gain = 1
 ads.mode = Mode.CONTINUOUS
 
+
+
 chan = AnalogIn(ads, ADS.P0, ADS.P1) #differential voltage, channels 0 & 1 specified by JFA on his Github
+s = 2		# seconds of recording
 
 
 
-#timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
-#micPath = "/home/pi/infrasound/dataFiles/micData" + timestr + ".csv"
-#f = open(micPath,'a+')
+launch_time = datetime.datetime.now()
+timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
+micPath = "/home/pi/Documents/glinda2_proto/dataFiles/glinda2_proto_data/micData" + timestr + ".csv"
+f = open(micPath,'a+')
 dat = []
 #looptime = time()
     #try:
 
-sleep(5)
-s = 30 # seconds of recording
+#sleep(5)		#this is only used for testing
 launch_time = datetime.datetime.now()
 print(f'Start time = {launch_time} \n Duration = {s}s \n Reading...\n')
 
 act_duration = 0.0000
 start = time()
-
 while (time()-start) < s:
 	#print(time(), chan.voltage)	# this printing statement slow the code WAAAAY too much
 	dat.append([time(), chan.voltage])

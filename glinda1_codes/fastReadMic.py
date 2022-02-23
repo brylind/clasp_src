@@ -22,7 +22,7 @@ def mic():
     launch_time = datetime.datetime.now()
     timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
     micPath = "/home/pi/infrasound/dataFiles/micData" + timestr + ".csv"
-    f = open(micPath,'a+')
+    f = open(micPath, 'a+')
     dat = []
     looptime = time()
     #try:
