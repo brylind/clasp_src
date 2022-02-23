@@ -15,12 +15,12 @@ while true; do
 
     ## remove the "removed" files status from the working tree index
     # THIS NEEDS TO BE RESEARCHED AND REFINED (I GOT IT FROM STACKOVERFLOW)
-    git ls-files --deleted -z | git update-index --assume-unchanged -z --stdin
+    #  git ls-files --deleted -z | git update-index --assume-unchanged -z --stdin
 
     ## add all changes to the add stage from the working tree (with the deleted files removed with the previous section)
-    sudo git add .;
+    # sudo git add .;
 
-    git commit; git push
+    # git commit; git push
     # ----------------------------
     sudo git add *
     now=$(date)
