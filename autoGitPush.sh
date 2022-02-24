@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd /home/pi/Documents/glinda2_proto/dataFiles
-while True; do
+while true; do
 
     # -mtime +2 is a positional argument specifying which files to look for based on when they were last modified
     # mtime +2 --> "modified time" is more than 2 day ago
