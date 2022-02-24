@@ -41,25 +41,25 @@ def mic():
 
 	try:
 		while 1:
-			for j in range(80):
-				start = time()
-				print(f'Start time = {launch_time} \n Duration = {s}s \n Reading...\n')
-				while (time()-start) < s:
-					# print(time(), chan.voltage)	# this printing statement slow the code WAAAAY too much
-					dat.append([time(), chan.voltage])
-					# act_duration = time()-start	# used for testing - BL
-					# sleep(0.0025)		# used for testing - BL
+			#for j in range(80):
+			start = time()
+			print(f'Start time = {launch_time} \n Duration = {s}s \n Reading...\n')
+			while (time()-start) < s:
+				# print(time(), chan.voltage)	# this printing statement slow the code WAAAAY too much
+				dat.append([time(), chan.voltage])
+				# act_duration = time()-start	# used for testing - BL
+				# sleep(0.0025)		# used for testing - BL
 
-				# data = pd.DataFrame(dat,columns = ['Time','Signal']) # used this for testing - BL
-				for d in dat:
-					f.write(str(d[0]) + ',' + str(d[1]) + '\n')
-				dat = []
-				f.close()
-				# print(data)	# used this for testing - BL
-				launch_time = datetime.datetime.now()
-				timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
-				micPath = (f'/home/pi/Documents/glinda2_proto/dataFiles/{device_hostname}_data/'
-					f'{device_hostname}_micData_{timestr}.csv')
+			# data = pd.DataFrame(dat,columns = ['Time','Signal']) # used this for testing - BL
+			for d in dat:
+				f.write(str(d[0]) + ',' + str(d[1]) + '\n')
+			dat = []
+			f.close()
+			# print(data)	# used this for testing - BL
+			launch_time = datetime.datetime.now()
+			timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
+			micPath = (f'/home/pi/Documents/glinda2_proto/dataFiles/{device_hostname}_data/'
+				f'{device_hostname}_micData_{timestr}.csv')
 	except KeyboardInterrupt:
 		f.close()
 		print('\n Done Writing \n')
