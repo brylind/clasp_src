@@ -54,12 +54,12 @@ def mic():
 				for d in dat:
 					f.write(str(d[0]) + ',' + str(d[1]) + '\n')
 				dat = []
-			f.close()
-			# print(data)	# used this for testing - BL
-			launch_time = datetime.datetime.now()
-			timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
-			micPath = (f'/home/pi/Documents/glinda2_proto/dataFiles/{device_hostname}_data/'
-				f'{device_hostname}_micData_{timestr}.csv')
+				f.close()
+				# print(data)	# used this for testing - BL
+				launch_time = datetime.datetime.now()
+				timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
+				micPath = (f'/home/pi/Documents/glinda2_proto/dataFiles/{device_hostname}_data/'
+					f'{device_hostname}_micData_{timestr}.csv')
 	except KeyboardInterrupt:
 		f.close()
 		print('\n Done Writing \n')
