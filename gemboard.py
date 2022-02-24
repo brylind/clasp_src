@@ -36,7 +36,7 @@ def mic():
 
 	# sleep(5)		# used for testing - BL
 	launch_time = datetime.datetime.now()
-	print(f'Start time = {launch_time} \n Duration = {s}s \n Reading...\n')
+	#print(f'Start time = {launch_time} \n Duration = {s}s \n Reading...\n')
 
 	# act_duration = 0.0000	# used for testing - BL
 
@@ -44,7 +44,7 @@ def mic():
 		while True:
 			#for j in range(80):
 			start = time()
-			print(f'Start time = {launch_time} \n Duration = {s}s \n Reading...\n')
+			#print(f'Start time = {launch_time} \n Duration = {s}s \n Reading...\n')
 			while (time()-start) < s:
 				# print(time(), chan.voltage)	# this printing statement slow the code WAAAAY too much
 				dat.append([time(), chan.voltage])
