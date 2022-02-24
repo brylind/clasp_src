@@ -16,7 +16,8 @@ def mic():
 	i2c = busio.I2C(board.SCL, board.SDA)
 
 	ads = ADS.ADS1115(i2c)
-	ads.data_rate = 475		# 8, 16, 32, 64, 128, 250, 475, 860
+	sample_rate = 860
+	ads.data_rate = sample_rate		# 8, 16, 32, 64, 128, 250, 475, 860
 	ads.gain = 1
 	ads.mode = Mode.CONTINUOUS
 
@@ -40,7 +41,7 @@ def mic():
 	# act_duration = 0.0000	# used for testing - BL
 
 	try:
-		while 1:
+		while True:
 			#for j in range(80):
 			start = time()
 			print(f'Start time = {launch_time} \n Duration = {s}s \n Reading...\n')
@@ -48,7 +49,7 @@ def mic():
 				# print(time(), chan.voltage)	# this printing statement slow the code WAAAAY too much
 				dat.append([time(), chan.voltage])
 				# act_duration = time()-start	# used for testing - BL
-				# sleep(0.0025)		# used for testing - BL
+				sleep(1/sample_rate)		# used for testing - BL
 
 			# data = pd.DataFrame(dat,columns = ['Time','Signal']) # used this for testing - BL
 			for d in dat:
@@ -60,11 +61,13 @@ def mic():
 			timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
 			micPath = (f'/home/pi/Documents/glinda2_proto/dataFiles/{device_hostname}_data/'
 				f'{device_hostname}_micData_{timestr}.csv')
+			f = open(micPath, 'a+')
+
 	except KeyboardInterrupt:
 		f.close()
 		print('\n Done Writing \n')
 	except:
-		print('ERROR')
+		print(f'ERROR at {time()}')
 		pass
 # data.to_csv("testingmic.csv",header=['Time (s)','Signal (V)']) # used for testing - BL
 
