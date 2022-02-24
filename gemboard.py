@@ -28,7 +28,7 @@ def mic():
 	timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
 	micPath = (f'/home/pi/Documents/glinda2_proto/dataFiles/{device_hostname}_data/'
 		f'{device_hostname}_micData_{timestr}.csv')
-	f = open(micPath, 'ax')
+	f = open(micPath, 'a')
 	dat = []
 	#looptime = time()
 		#try:
