@@ -1,13 +1,16 @@
 #!/bin/bash
 
 cd /home/pi/Documents/glinda2_proto/dataFiles
-while true; do
+i=0
+while i=0; do
 
     # -mtime +2 is a positional argument specifying which files to look for based on when they were last modified
     # mtime +2 --> "modified time" is more than 2 day ago
     # The argument is called daystart - googling "linux daystart" helps
     # type "man find" for more info.. this line is just deleting data modified more than a day ago
-    sudo find /home/pi/Documents/glinda2_proto/dataFiles -mtime +2 -delete
+    sudo find /home/pi/Documents/glinda2_proto/dataFiles -mmin +60 -delete
+
+    # sudo find /home/pi/Documents/glinda2_proto/dataFiles -mtime +1 -delete
     ## remove older files
     # sudo find .... -delete
 
@@ -24,5 +27,6 @@ while true; do
     now=$(date)
     sleep 10
     sudo git commit -m "Automatic Push: $now"
-    sleep 600
+    i=1
+    #sleep 600
 done
