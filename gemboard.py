@@ -16,7 +16,7 @@ def mic():
 	i2c = busio.I2C(board.SCL, board.SDA)
 
 	ads = ADS.ADS1115(i2c)
-	ads.data_rate = 475
+	ads.data_rate = 470
 	ads.gain = 1
 	ads.mode = Mode.CONTINUOUS
 
