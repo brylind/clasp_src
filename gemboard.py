@@ -43,6 +43,7 @@ def mic():
 		while 1:
 			for j in range(80):
 				start = time()
+				print(f'Start time = {launch_time} \n Duration = {s}s \n Reading...\n')
 				while (time()-start) < s:
 					# print(time(), chan.voltage)	# this printing statement slow the code WAAAAY too much
 					dat.append([time(), chan.voltage])
