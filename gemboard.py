@@ -41,18 +41,19 @@ def mic():
 
 	try:
 		while 1:
-			start = time()
-			while (time()-start) < s:
-				# print(time(), chan.voltage)	# this printing statement slow the code WAAAAY too much
-				dat.append([time(), chan.voltage])
-				# act_duration = time()-start	# used for testing - BL
-				# sleep(0.0025)		# used for testing - BL
+			for j in range(80):
+				start = time()
+				while (time()-start) < s:
+					# print(time(), chan.voltage)	# this printing statement slow the code WAAAAY too much
+					dat.append([time(), chan.voltage])
+					# act_duration = time()-start	# used for testing - BL
+					# sleep(0.0025)		# used for testing - BL
 
-			# data = pd.DataFrame(dat,columns = ['Time','Signal']) # used this for testing - BL
-			for d in dat:
-				f.write(str(d[0]) + ',' + str(d[1]) + '\n')
+				# data = pd.DataFrame(dat,columns = ['Time','Signal']) # used this for testing - BL
+				for d in dat:
+					f.write(str(d[0]) + ',' + str(d[1]) + '\n')
+				dat = []
 			f.close()
-			dat = []
 			# print(data)	# used this for testing - BL
 			launch_time = datetime.datetime.now()
 			timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
