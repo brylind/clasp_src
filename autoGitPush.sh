@@ -1,5 +1,4 @@
 #!/bin/bash
-
 cd /home/pi/Documents/glinda2_proto/dataFiles
 while true; do
 
@@ -9,8 +8,8 @@ while true; do
     # type "man find" for more info.. this line is just deleting data modified more than a day ago
 
   # todo: figure out how to insert hostname in bash file so it can be modular for each glinda2 unit
-    sudo find /home/pi/Documents/glinda2_proto/dataFiles/GLINDA2pi_data -not -type d -mmin +30 -delete
-
+    sudo find /home/pi/Documents/glinda2_proto/dataFiles/GLINDA2pi_data -not -type d -mmin +20 -delete
+    echo "Data files older than 20 minutes have been deleted"
     #sudo find /home/pi/Documents/glinda2_proto/dataFiles/GLINDA2pi_data -not -type d -mtime +1 -delete
     ## remove older files
     # sudo find .... -delete
@@ -18,15 +17,19 @@ while true; do
     ## remove the "removed" files status from the working tree index
     # THIS NEEDS TO BE RESEARCHED AND REFINED (I GOT IT FROM STACKOVERFLOW)
     git ls-files --deleted -z | git update-index --assume-unchanged -z --stdin
-
+    echo "Deleted files have been ignored for current git index"
     ## add all changes to the add stage from the working tree (with the deleted files removed with the previous section)
     sudo git add .
-
+    echo"Git add all"
     # git commit; git push
     # --------------------------------------------------------
     #sudo git add .
     now=$(date)
+    echo "sleeping 10 seconds to allow files time to index"
     sleep 10    # sleep to allow files time to index into git working tree
+    echo "10 second sleep done"
     sudo git commit -m "Automatic Push: $now"
-    sleep 600
+    echo "git commit 'automatic push' done"
+    echo "initiate 5 minute sleep"
+    sleep 300
 done
