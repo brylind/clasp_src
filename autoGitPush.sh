@@ -9,7 +9,7 @@ while true; do
     # type "man find" for more info.. this line is just deleting data modified more than a day ago
 
   # todo: figure out how to insert hostname in bash file so it can be modular for each glinda2 unit
-    sudo find /home/pi/Documents/glinda2_proto/dataFiles/GLINDA2pi_data -not -type d -mmin +30 -delete
+    sudo find /home/pi/Documents/glinda2_proto/dataFiles/GLINDA2pi_data -not -type d -mmin +20 -delete
 
     #sudo find /home/pi/Documents/glinda2_proto/dataFiles/GLINDA2pi_data -not -type d -mtime +1 -delete
     ## remove older files
@@ -28,5 +28,5 @@ while true; do
     now=$(date)
     sleep 10    # sleep to allow files time to index into git working tree
     sudo git commit -m "Automatic Push: $now"
-    sleep 600
+    sleep 300
 done
