@@ -59,7 +59,7 @@ def mic():
 
 			data = pd.DataFrame(dat,columns = ['Time','Signal']) # used this for testing - BL
 			data.to_csv("testingmic.csv", header=['Time (s)', 'Signal (V)'])  # used for testing - BL
-			sys.exit()
+			quit()
 			# for d in dat:
 			# 	f.write(str(d[0]) + ',' + str(d[1]) + '\n')
 			# dat = []
