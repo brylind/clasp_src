@@ -1,5 +1,7 @@
 # Mic Recording Script
 #HEY BRYCE!
+import sys
+
 
 def mic():
 	from adafruit_ads1x15.analog_in import AnalogIn
@@ -57,7 +59,7 @@ def mic():
 
 			data = pd.DataFrame(dat,columns = ['Time','Signal']) # used this for testing - BL
 			data.to_csv("testingmic.csv", header=['Time (s)', 'Signal (V)'])  # used for testing - BL
-
+			sys.exit()
 			# for d in dat:
 			# 	f.write(str(d[0]) + ',' + str(d[1]) + '\n')
 			# dat = []
