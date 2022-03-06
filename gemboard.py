@@ -38,15 +38,17 @@ def mic():
 	launch_time = datetime.datetime.now()
 	#print(f'Start time = {launch_time} \n Duration = {s}s \n Reading...\n')
 
+	gain, native_sens = 107.38, 0.000022
 	# act_duration = 0.0000	# used for testing - BL
-
 	try:
 		while True:
 			#for j in range(80):
 			start = time()
 			#print(f'Start time = {launch_time} \n Duration = {s}s \n Reading...\n')
 			while (time()-start) < s:
-				# print(time(), chan.voltage)	# this printing statement slow the code WAAAAY too much
+				# this printing statement slows the code WAAAAY too much. Only use for testing.
+				print(time(), gain*chan.voltage/native_sens)
+
 				dat.append([time(), chan.voltage])
 				# act_duration = time()-start	# used for testing - BL
 				sleep(1/sample_rate)		# used for testing - BL
@@ -74,9 +76,9 @@ def mic():
 # used this for testing - BL
 # os.system('cd ~/Documents/glinda2_proto/gitcodes; git add testingmic.csv; git commit -m "autopush data from pi"; git push')
 
-
 if __name__ == '__main__':
 	mic()
+
 
 
 
