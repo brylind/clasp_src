@@ -30,6 +30,7 @@ while true; do
     echo "10 second sleep done"
     sudo git commit -m "Automatic Push: $now"
     echo "git commit 'automatic push' done"
+    sudo git push
     echo "initiate 5 minute sleep"
     sleep 300
 done
