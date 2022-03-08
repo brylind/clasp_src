@@ -39,7 +39,7 @@ def mic():
 		#try:
 
 	# sleep(5)		# used for testing - BL
-	launch_time = datetime.datetime.now()
+	#launch_time = datetime.datetime.now()
 	#print(f'Start time = {launch_time} \n Duration = {s}s \n Reading...\n')
 
 	#gain, native_sens = 107.38, 0.000022	# used for testing
@@ -57,21 +57,22 @@ def mic():
 				# act_duration = time()-start	# used for testing - BL
 				sleep(1/sample_rate)		# used for testing - BL
 
-			data = pd.DataFrame(dat,columns = ['Time','Signal']) # used this for testing - BL
-			data.to_csv("testingmic.csv", header=['Time (s)', 'Signal (V)'])  # used for testing - BL
-			quit()
-			# for d in dat:
-			# 	f.write(str(d[0]) + ',' + str(d[1]) + '\n')
-			# dat = []
-			# f.close()
-			# launch_time = datetime.datetime.now()
-			# timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
-			# micPath = (f'/home/pi/Documents/glinda2_proto/dataFiles/{device_hostname}_data/'
-			# 	f'{device_hostname}_micData_{timestr}.csv')
-			# f = open(micPath, 'a+')
+			# data = pd.DataFrame(dat,columns = ['Time','Signal']) # used this for testing - BL
+			# data.to_csv("testingmic.csv", header=['Time (s)', 'Signal (V)'])  # used for testing - BL
+			# quit()
+
+			for d in dat:
+				f.write(str(d[0]) + ',' + str(d[1]) + '\n')
+			dat = []
+			f.close()
+			launch_time = datetime.datetime.now()
+			timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
+			micPath = (f'/home/pi/Documents/glinda2_proto/dataFiles/{device_hostname}_data/'
+				f'{device_hostname}_micData_{timestr}.csv')
+			f = open(micPath, 'a+')
 
 	except KeyboardInterrupt:
-		#f.close()
+		f.close()
 		print('\n Done Writing \n')
 	except:
 		print(f'ERROR at {time()}')
