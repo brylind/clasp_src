@@ -20,7 +20,7 @@ while true; do
     echo "Deleted files have been ignored for current git index"
     ## add all changes to the add stage from the working tree (with the deleted files removed with the previous section)
     git add .
-    echo"Git add all"
+    #echo"Git add all"
     # git commit; git push
     # --------------------------------------------------------
     #sudo git add .
