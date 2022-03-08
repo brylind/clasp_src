@@ -19,7 +19,7 @@ while true; do
     git ls-files --deleted -z | git update-index --assume-unchanged -z --stdin
     echo "Deleted files have been ignored for current git index"
     ## add all changes to the add stage from the working tree (with the deleted files removed with the previous section)
-    sudo git add .
+    git add .
     echo"Git add all"
     # git commit; git push
     # --------------------------------------------------------
@@ -28,9 +28,9 @@ while true; do
     echo "sleeping 10 seconds to allow files time to index"
     sleep 10    # sleep to allow files time to index into git working tree
     echo "10 second sleep done"
-    sudo git commit -m "Automatic Push: $now"
+    git commit -m "Automatic Push: $now"
     echo "git commit 'automatic push' done"
-    sudo git push
+    git push
     echo "initiate 5 minute sleep"
     sleep 300
 done
