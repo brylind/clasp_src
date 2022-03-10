@@ -1,5 +1,5 @@
 # Mic Recording Script
-#HEY BRYCE!
+#DOES THIS SHOW  - 3/10 11:01
 import sys
 
 
