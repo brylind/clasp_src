@@ -32,7 +32,7 @@ def launcher(i2c, runtime = -1):
     #gpsRecorder = Process(target=GPS, daemon = True)
     #imuRecorder = Process(target=IMU, daemon = True)
     sleep(2)
-    print('***uuProcesses Established \n')
+    print('***Processes Established \n')
 
     print('Launching Processes...')
     sleep(2)
