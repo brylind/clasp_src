@@ -17,7 +17,7 @@ try:
         comline_mic = f'rclone move "{gps_data_path}" "glinda_data:{gps_remote_loc}" --min-age 2m'
         os.system(comline_mic)
 
-        sleep(600)
+        sleep(300)
 except:
     os.system("rclone push attempt failed")
 
