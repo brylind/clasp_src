@@ -26,7 +26,7 @@ lasttime = time[-1]
 totaltime = lasttime-firsttime
 N = int(len(time))
 sample_rate = len(time)/(lasttime - firsttime)
-
+print(sample_rate)
 yf = rfft(signal)
 xf = rfftfreq(N, 1/sample_rate)
 
