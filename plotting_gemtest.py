@@ -16,8 +16,7 @@ mic_gain = 107  # gain-no units
 mic_sensitivity = .000022   #V/Pa
 
 # uncomment this if dealing with actual GLINDA data (doesnt have column titles)
-
-
+df_imported.columns = ['Time (s)', 'Signal (V)']
 
 time = df_imported['Time (s)'].values
 signal_ugly = df_imported['Signal (V)'].values
