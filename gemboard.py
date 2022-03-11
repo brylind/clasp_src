@@ -2,13 +2,12 @@
 #DOES THIS SHOW  - 3/11 9:21
 import sys
 
-
 def mic():
 	from adafruit_ads1x15.analog_in import AnalogIn
 	from adafruit_ads1x15.ads1x15 import Mode
 	import adafruit_ads1x15.ads1115 as ADS
 	import pandas as pd
-
+	hname = socket.gethostname()
 
 	from time import time, sleep
 	import datetime
@@ -31,7 +30,7 @@ def mic():
 	device_hostname = socket.gethostname()
 	launch_time = datetime.datetime.now()
 	timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
-	micPath = (f'/home/pi/Documents/glinda2_proto/dataFiles/{device_hostname}_data/'
+	micPath = (f'/home/pi/glinda_main/dataFiles/mic/'
 		f'{device_hostname}_micData_{timestr}.csv')
 	f = open(micPath, 'a+')
 	dat = []
@@ -59,8 +58,8 @@ def mic():
 			f.close()
 			launch_time = datetime.datetime.now()
 			timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
-			micPath = (f'/home/pi/Documents/glinda2_proto/dataFiles/{device_hostname}_data/'
-				f'{device_hostname}_micData_{timestr}.csv')
+			micPath = (f'/home/pi/glinda_main/dataFiles/mic/'
+					   f'{device_hostname}_micData_{timestr}.csv')
 			f = open(micPath, 'a+')
 
 	except KeyboardInterrupt:
