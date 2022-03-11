@@ -34,24 +34,17 @@ def mic():
 		f'{device_hostname}_micData_{timestr}.csv')
 	f = open(micPath, 'a+')
 	dat = []
-
 	try:
 		while True:
-			#for j in range(80):
 			start = time()
-			#print(f'Start time = {launch_time} \n Duration = {s}s \n Reading...\n')
 			while (time()-start) < s:
-				# this printing statement slows the code WAAAAY too much. Only use for testing.
-				# print(time(), gain*chan.voltage/native_sens) used for testing
-
 				dat.append([time(), chan.voltage])
-				# act_duration = time()-start	# used for testing - BL
-				sleep(1/sample_rate)		# used for testing - BL
-
+				sleep(1/sample_rate)
+			####################### used for testing
 			# data = pd.DataFrame(dat,columns = ['Time','Signal']) # used this for testing - BL
 			# data.to_csv("testingmic.csv", header=['Time (s)', 'Signal (V)'])  # used for testing - BL
 			# quit()
-
+			###########################################
 			for d in dat:
 				f.write(str(d[0]) + ',' + str(d[1]) + '\n')
 			dat = []
@@ -59,7 +52,7 @@ def mic():
 			launch_time = datetime.datetime.now()
 			timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
 			micPath = (f'/home/pi/glinda_main/dataFiles/mic/'
-					   f'{device_hostname}_micData_{timestr}.csv')
+				f'{device_hostname}_micData_{timestr}.csv')
 			f = open(micPath, 'a+')
 
 	except KeyboardInterrupt:
@@ -69,9 +62,6 @@ def mic():
 		print(f'ERROR at {time()}')
 		pass
 
-
-# used this for testing - BL
-# os.system('cd ~/Documents/glinda2_proto/gitcodes; git add testingmic.csv; git commit -m "autopush data from pi"; git push')
 
 if __name__ == '__main__':
 	mic()
