@@ -7,7 +7,7 @@ def mic():
 	from adafruit_ads1x15.ads1x15 import Mode
 	import adafruit_ads1x15.ads1115 as ADS
 	import pandas as pd
-	hname = socket.gethostname()
+
 
 	from time import time, sleep
 	import datetime
