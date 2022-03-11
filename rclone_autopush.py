@@ -7,7 +7,7 @@ mic_data_path = f"/home/pi/glinda_main/dataFiles/mic"
 gps_data_path = f"/home/pi/glinda_main/dataFiles/gps"
 mic_remote_loc = f"{hname}/{hname}_mic_data"
 gps_remote_loc = f"{hname}/{hname}_gps_data"
-
+sleep(20)
 
 try:
     while True:
