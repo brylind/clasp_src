@@ -1,5 +1,5 @@
 # Mic Recording Script
-#DOES THIS SHOW  - 3/10 11:01
+#DOES THIS SHOW  - 3/11 9:01
 import sys
 
 
@@ -20,7 +20,7 @@ def mic():
 	i2c = busio.I2C(board.SCL, board.SDA)
 
 	ads = ADS.ADS1115(i2c)
-	sample_rate = 860
+	sample_rate = 475
 	ads.data_rate = sample_rate		# 8, 16, 32, 64, 128, 250, 475, 860
 	ads.gain = 1
 	ads.mode = Mode.CONTINUOUS
@@ -57,19 +57,19 @@ def mic():
 				# act_duration = time()-start	# used for testing - BL
 				sleep(1/sample_rate)		# used for testing - BL
 
-			data = pd.DataFrame(dat,columns = ['Time','Signal']) # used this for testing - BL
-			data.to_csv("testingmic.csv", header=['Time (s)', 'Signal (V)'])  # used for testing - BL
-			quit()
+			# data = pd.DataFrame(dat,columns = ['Time','Signal']) # used this for testing - BL
+			# data.to_csv("testingmic.csv", header=['Time (s)', 'Signal (V)'])  # used for testing - BL
+			# quit()
 
-			# for d in dat:
-			# 	f.write(str(d[0]) + ',' + str(d[1]) + '\n')
-			# dat = []
-			# f.close()
-			# launch_time = datetime.datetime.now()
-			# timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
-			# micPath = (f'/home/pi/Documents/glinda2_proto/dataFiles/{device_hostname}_data/'
-			# 	f'{device_hostname}_micData_{timestr}.csv')
-			# f = open(micPath, 'a+')
+			for d in dat:
+				f.write(str(d[0]) + ',' + str(d[1]) + '\n')
+			dat = []
+			f.close()
+			launch_time = datetime.datetime.now()
+			timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
+			micPath = (f'/home/pi/Documents/glinda2_proto/dataFiles/{device_hostname}_data/'
+				f'{device_hostname}_micData_{timestr}.csv')
+			f = open(micPath, 'a+')
 
 	except KeyboardInterrupt:
 		f.close()
