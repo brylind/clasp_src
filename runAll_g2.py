@@ -17,7 +17,7 @@ import datetime
 i2c = busio.I2C(board.SCL, board.SDA)
 
 #from fastReadIMU import IMU
-#from fastReadGPS import GPS
+from readGPS import GPS
 from readMIC import mic
 
 def launcher(i2c, runtime = -1):
@@ -29,7 +29,7 @@ def launcher(i2c, runtime = -1):
     #Setup - List Processes
     print('Establishing Processes...')
     micRecorder = Process(target=mic, daemon = True)
-    #gpsRecorder = Process(target=GPS, daemon = True)
+    gpsRecorder = Process(target=GPS, daemon = True)
     #imuRecorder = Process(target=IMU, daemon = True)
     sleep(2)
     print('***Processes Established \n')
@@ -38,7 +38,7 @@ def launcher(i2c, runtime = -1):
     sleep(2)
     try:
         micRecorder.start()
-        #gpsRecorder.start()
+        gpsRecorder.start()
         #imuRecorder.start()
         launch_time = time()
 
@@ -52,31 +52,31 @@ def launcher(i2c, runtime = -1):
         sleep(2)
 
         micRecorder.terminate()
-        #gpsRecorder.terminate()
+        gpsRecorder.terminate()
         #imuRecorder.terminate()
         micRecorder.join()
         micRecorder.join()
-        #gpsRecorder.join()
+        gpsRecorder.join()
         #imuRecorder.join()
 
         print('Processes Joined')
 
     except KeyboardInterrupt:
         micRecorder.terminate()
-        #gpsRecorder.terminate()
+        gpsRecorder.terminate()
         #imuRecorder.terminate()
         micRecorder.join()
-        #gpsRecorder.join()
+        gpsRecorder.join()
         #imuRecorder.join()
         print('Launcher Script Ended at Keyboad')
     #except:
-        #micRecorder.terminate()
-        #gpsRecorder.terminate()
+        micRecorder.terminate()
+        gpsRecorder.terminate()
         #imuRecorder.terminate()
-        #micRecorder.join()
-        #gpsRecorder.join()
+        micRecorder.join()
+        gpsRecorder.join()
         #imuRecorder.join()
-        #print('Unknown Error in Launcher')
+        print('Unknown Error in Launcher')
 
 
 if __name__ == "__main__":

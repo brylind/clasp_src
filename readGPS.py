@@ -9,7 +9,7 @@ def GPS():
     import busio
     import socket
     import serial
-    uart = serial.Serial("/dev/ttyS0", baudrate=9600, timeout=10)
+    uart = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=10)
 
     gps = adafruit_gps.GPS(uart, debug=False) # Use UART/pyserial
 
@@ -18,15 +18,15 @@ def GPS():
 
     # Set update rate to once a second (1hz) which is what you typically want.
     gps.send_command(b"PMTK220,1000")
-    # device_hostname = socket.gethostname()
-    # launch_time = datetime.datetime.now()
-    # timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
-    # gpsPath = f'/home/pi/glinda_main/dataFiles/gps/{device_hostname}_gpsData_{timestr}.csv'
-    # f = open(gpsPath,'a+')
+    device_hostname = socket.gethostname()
+    launch_time = datetime.datetime.now()
+    timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
+    gpsPath = f'/home/pi/glinda_main/dataFiles/gps/{device_hostname}_gpsData_{timestr}.csv'
+    f = open(gpsPath,'a+')
     dat = []
-    looptime = time()
+    # looptime = time()
     #try:
-    print('Reading GPS...\n')
+    #print('Reading GPS...\n')
 
     try:
         while 1:
@@ -38,17 +38,18 @@ def GPS():
                     else:
                         dat.append([time(), 0, 0, -1, -1, 0])
                     sleep(1)
-                    print(dat)  # used this for testing - BL
+                    #print(dat)  # used this for testing - BL
                 #print('Writing... \n')
-            #     for d in dat:
-            #         f.write(str(d[0]) + ',' + str(d[1]) + ',' + str(d[2]) + ',' + str(d[3]) + ',' + str(d[4]) + ',' + str(d[5]) + '\n')
-            #     #print('Closed.. \n')
-            #     dat = []
-            # f.close()
-            # launch_time = datetime.datetime.now()
-            # timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
-            # gpsPath = f'/home/pi/glinda_main/dataFiles/gps/{device_hostname}_gpsData_{timestr}.csv'
-            # f = open(gpsPath,'a+')
+                f.write('Time_s' + ',' + 'Latitude' + ',' + 'Longitude' + ',' + 'Speed_kts' + ',' + 'GPS_fix' + ',' 'Satellites' + '\n')
+                for d in dat:
+                    f.write(str(d[0]) + ',' + str(d[1]) + ',' + str(d[2]) + ',' + str(d[3]) + ',' + str(d[4]) + ',' + str(d[5]) + '\n')
+                #print('Closed.. \n')
+                dat = []
+            f.close()
+            launch_time = datetime.datetime.now()
+            timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
+            gpsPath = f'/home/pi/glinda_main/dataFiles/gps/{device_hostname}_gpsData_{timestr}.csv'
+            f = open(gpsPath,'a+')
             print('NEW GPS FILE')
     except KeyboardInterrupt:
         f.close()
