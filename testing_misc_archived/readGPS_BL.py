@@ -27,13 +27,14 @@ def GPS():
     looptime = time()
     #try:
     print('Reading GPS...\n')
-
+    blah = 1
     try:
         while 1:
             for j in range(9):
                 for i in range(60):
                     gps.update()
-                    if gps.has_fix:
+                    if blah == 1:
+                    # if gps.has_fix:
                         dat.append([time(), gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites])
                     else:
                         dat.append([time(), 0, 0, -1, -1, 0])
