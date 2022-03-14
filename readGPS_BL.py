@@ -38,7 +38,7 @@ def GPS():
                     else:
                         dat.append([time(), 0, 0, -1, -1, 0])
                     sleep(1)
-                    print(f'{dat}\n')  # used this for testing - BL
+                    print(f'{dat} \n')  # used this for testing - BL
                 #print('Writing... \n')
             #     for d in dat:
             #         f.write(str(d[0]) + ',' + str(d[1]) + ',' + str(d[2]) + ',' + str(d[3]) + ',' + str(d[4]) + ',' + str(d[5]) + '\n')
