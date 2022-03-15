@@ -9,7 +9,7 @@ def GPS():
     import busio
     import socket
     import serial
-    uart = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=5)
+    uart = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=10)
 
     gps = adafruit_gps.GPS(uart, debug=False) # Use UART/pyserial
 
@@ -30,7 +30,7 @@ def GPS():
 
     try:
         while 1:
-            for j in range(4):
+            for j in range(5):      # the range(#'s) are the size of the output file (when multiplied)
                 for i in range(60):
                     gps.update()
                     if gps.has_fix:
@@ -38,7 +38,6 @@ def GPS():
                     else:
                         dat.append([time(), 0, 0, -1, -1, 0])
                     sleep(1)
-                    #print(dat)  # used this for testing - BL
                 #print('Writing... \n')
             f.write('Time_s' + ',' + 'Latitude' + ',' + 'Longitude' + ',' + 'Speed_kts' + ',' + 'GPS_fix' + ',' 'Satellites' + '\n')
             for d in dat:
