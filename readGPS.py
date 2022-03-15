@@ -30,7 +30,7 @@ def GPS():
 
     try:
         while 1:
-            for j in range(9):
+            for j in range(4):
                 for i in range(60):
                     gps.update()
                     if gps.has_fix:
