@@ -40,11 +40,11 @@ def GPS():
                     sleep(1)
                     #print(dat)  # used this for testing - BL
                 #print('Writing... \n')
-                f.write('Time_s' + ',' + 'Latitude' + ',' + 'Longitude' + ',' + 'Speed_kts' + ',' + 'GPS_fix' + ',' 'Satellites' + '\n')
-                for d in dat:
-                    f.write(str(d[0]) + ',' + str(d[1]) + ',' + str(d[2]) + ',' + str(d[3]) + ',' + str(d[4]) + ',' + str(d[5]) + '\n')
-                #print('Closed.. \n')
-                dat = []
+            f.write('Time_s' + ',' + 'Latitude' + ',' + 'Longitude' + ',' + 'Speed_kts' + ',' + 'GPS_fix' + ',' 'Satellites' + '\n')
+            for d in dat:
+                f.write(str(d[0]) + ',' + str(d[1]) + ',' + str(d[2]) + ',' + str(d[3]) + ',' + str(d[4]) + ',' + str(d[5]) + '\n')
+            #print('Closed.. \n')
+            dat = []
             f.close()
             launch_time = datetime.datetime.now()
             timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
