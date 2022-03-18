@@ -1,5 +1,6 @@
 # Mic Recording Script
 #DOES THIS SHOW  - 3/11 2:55
+import os
 
 
 def mic():
@@ -10,7 +11,7 @@ def mic():
 
 
 	from time import time, sleep
-	#import datetime
+	import datetime
 	import board
 	import busio
 	#import socket
@@ -57,7 +58,9 @@ def mic():
 			# micPath = (f'/home/pi/glinda_main/dataFiles/mic/'
 			# 	f'{device_hostname}_micData_{timestr}.csv')
 			# f = open(micPath, 'a+')
-
+			os.system(f'git add "testingmic.csv";'
+					f' git commit -m "added testingmic.csv at {datetime.datetime.now()};'
+					f' git push')
 	except KeyboardInterrupt:
 		# f.close()
 		print('\n Done Writing \n')
