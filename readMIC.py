@@ -10,10 +10,10 @@ def mic():
 
 
 	from time import time, sleep
-	#import datetime
+	import datetime
 	import board
 	import busio
-	#import socket
+	import socket
 	import sys
 
 
@@ -27,14 +27,14 @@ def mic():
 	ads.mode = Mode.CONTINUOUS
 
 	chan = AnalogIn(ads, ADS.P0, ADS.P1)		# differential voltage, channels 0 & 1 specified by JFA on his Github
-	s = 15		# seconds of recording
+	s = 30		# seconds of recording
 
-	# device_hostname = socket.gethostname()
-	# launch_time = datetime.datetime.now()
-	# timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
-	# micPath = (f'/home/pi/glinda_main/dataFiles/mic/'
-	# 	f'{device_hostname}_micData_{timestr}.csv')
-	# f = open(micPath, 'a+')
+	device_hostname = socket.gethostname()
+	launch_time = datetime.datetime.now()
+	timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
+	micPath = (f'/home/pi/glinda_main/dataFiles/mic/'
+		f'{device_hostname}_micData_{timestr}.csv')
+	f = open(micPath, 'a+')
 	dat = []
 	try:
 		while True:
@@ -43,23 +43,23 @@ def mic():
 				dat.append([time(), chan.voltage])
 				sleep(1/sample_rate)
 			####################### used for testing
-			data = pd.DataFrame(dat,columns = ['Time','Signal']) # used this for testing - BL
-			data.to_csv("testingmic.csv", header=['Time (s)', 'Signal (V)'])  # used for testing - BL
-			quit()
+			# data = pd.DataFrame(dat,columns = ['Time','Signal']) # used this for testing - BL
+			# data.to_csv("testingmic.csv", header=['Time (s)', 'Signal (V)'])  # used for testing - BL
+			# quit()
 			###########################################
-			# f.write('Time_s' + ',' + 'Signal_V' + '\n')
-			# for d in dat:
-			# 	f.write(str(d[0]) + ',' + str(d[1]) + '\n')
+			f.write('Time_s' + ',' + 'Signal_V' + '\n')
+			for d in dat:
+				f.write(str(d[0]) + ',' + str(d[1]) + '\n')
 			dat = []
-			# f.close()
-			# launch_time = datetime.datetime.now()
-			# timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
-			# micPath = (f'/home/pi/glinda_main/dataFiles/mic/'
-			# 	f'{device_hostname}_micData_{timestr}.csv')
-			# f = open(micPath, 'a+')
+			f.close()
+			launch_time = datetime.datetime.now()
+			timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
+			micPath = (f'/home/pi/glinda_main/dataFiles/mic/'
+				f'{device_hostname}_micData_{timestr}.csv')
+			f = open(micPath, 'a+')
 
 	except KeyboardInterrupt:
-		# f.close()
+		f.close()
 		print('\n Done Writing \n')
 	except:
 		print(f'ERROR at {time()}')
