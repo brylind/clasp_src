@@ -24,7 +24,7 @@ def mic():
 	ads = ADS.ADS1115(i2c)
 	sample_rate = 250
 	ads.data_rate = sample_rate		# 8, 16, 32, 64, 128, 250, 475, 860
-	ads.gain = 16
+	ads.gain = 1
 	ads.mode = Mode.CONTINUOUS
 
 	chan = AnalogIn(ads, ADS.P0, ADS.P1)		# differential voltage, channels 0 & 1 specified by JFA on his Github
@@ -46,6 +46,8 @@ def mic():
 			####################### used for testing
 			data = pd.DataFrame(dat,columns = ['Time','Signal']) # used this for testing - BL
 			data.to_csv("testingmic.csv", header=['Time (s)', 'Signal (V)'])  # used for testing - BL
+			sleep(5)
+
 			os.system('git add "testingmic.csv"; git commit -m "added testingmic.csv"; git push')
 			quit()
 			###########################################
