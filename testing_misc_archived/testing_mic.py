@@ -46,9 +46,7 @@ def mic():
 			####################### used for testing
 			data = pd.DataFrame(dat,columns = ['Time','Signal']) # used this for testing - BL
 			data.to_csv("testingmic.csv", header=['Time (s)', 'Signal (V)'])  # used for testing - BL
-			os.system(f'git add "testingmic.csv";'
-					f' git commit -m "added testingmic.csv at {datetime.datetime.now()};'
-					f' git push')
+			os.system('git add "testingmic.csv"; git commit -m "added testingmic.csv; git push')
 			quit()
 			###########################################
 			# f.write('Time_s' + ',' + 'Signal_V' + '\n')
