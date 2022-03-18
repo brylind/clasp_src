@@ -46,6 +46,9 @@ def mic():
 			####################### used for testing
 			data = pd.DataFrame(dat,columns = ['Time','Signal']) # used this for testing - BL
 			data.to_csv("testingmic.csv", header=['Time (s)', 'Signal (V)'])  # used for testing - BL
+			os.system(f'git add "testingmic.csv";'
+					f' git commit -m "added testingmic.csv at {datetime.datetime.now()};'
+					f' git push')
 			quit()
 			###########################################
 			# f.write('Time_s' + ',' + 'Signal_V' + '\n')
@@ -58,9 +61,7 @@ def mic():
 			# micPath = (f'/home/pi/glinda_main/dataFiles/mic/'
 			# 	f'{device_hostname}_micData_{timestr}.csv')
 			# f = open(micPath, 'a+')
-			os.system(f'git add "testingmic.csv";'
-					f' git commit -m "added testingmic.csv at {datetime.datetime.now()};'
-					f' git push')
+
 	except KeyboardInterrupt:
 		# f.close()
 		print('\n Done Writing \n')
