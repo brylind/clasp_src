@@ -33,7 +33,7 @@ def GPS():
             for j in range(5):      # the range(#'s) are the size of the output file (when multiplied)
                 for i in range(60):
                     gps.update()
-                    if gps.has_fix:
+                    if gps.has_fix:                                 #gps fix: 0=no, 1=yes, 2=differential fix
                         dat.append([time(), gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites])
                     else:
                         dat.append([time(), 0, 0, -1, -1, 0])
@@ -45,7 +45,7 @@ def GPS():
             #print('Closed.. \n')
             dat = []
             f.close()
-            launch_time = datetime.datetime.now()
+            launch_time = datetime.d    atetime.now()
             timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
             gpsPath = f'/home/pi/glinda_main/dataFiles/gps/{device_hostname}_gpsData_{timestr}.csv'
             f = open(gpsPath,'a+')
