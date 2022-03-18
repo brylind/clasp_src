@@ -1,6 +1,6 @@
-	# Mic Recording Script
-	#DOES THIS SHOW  - 3/11 2:55
-	import sys
+# Mic Recording Script
+#DOES THIS SHOW  - 3/11 2:55
+
 
 def mic():
 	from adafruit_ads1x15.analog_in import AnalogIn
@@ -10,10 +10,12 @@ def mic():
 
 
 	from time import time, sleep
-	import datetime
+	#import datetime
 	import board
 	import busio
-	import socket
+	#import socket
+	import sys
+
 
 	# I'm using this line instead after setting the baudrate manually in /boot/config.txt
 	i2c = busio.I2C(board.SCL, board.SDA)
