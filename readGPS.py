@@ -45,7 +45,7 @@ def GPS():
             #print('Closed.. \n')
             dat = []
             f.close()
-            launch_time = datetime.d    atetime.now()
+            launch_time = datetime.datetime.now()
             timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
             gpsPath = f'/home/pi/glinda_main/dataFiles/gps/{device_hostname}_gpsData_{timestr}.csv'
             f = open(gpsPath,'a+')
