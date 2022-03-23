@@ -52,7 +52,7 @@ def GPS():
             # f = open(gpsPath,'a+')
             print('NEW GPS FILE')
     except KeyboardInterrupt:
-        f.close()
+        #f.close()
         print('\n Done Writing \n')
     except:
         print('ERROR')
