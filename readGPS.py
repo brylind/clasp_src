@@ -24,7 +24,6 @@ def GPS():
     gpsPath = f'/home/pi/glinda_main/dataFiles/gps/{device_hostname}_gpsData_{timestr}.csv'
     f = open(gpsPath,'a+')
     dat = []
-    timedif = []    # difference between system and GPS (important if no internet connection... which updates the system clock)
     # looptime = time()
     #try:
     #print('Reading GPS...\n')
@@ -35,14 +34,24 @@ def GPS():
                 for i in range(60):
                     gps.update()
                     if gps.has_fix:                                 #gps fix: 0=no, 1=yes, 2=differential fix
-                        dat.append([time(), gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites])
+                        gps_time = datetime.datetime(gps.timestamp_utc.tm_year,
+                            gps.timestamp_utc.tm_mon, 
+                            gps.timestamp_utc.tm_mday,
+                            gps.timestamp_utc.tm_hour, 
+                            gps.timestamp_utc.tm_min,
+                            gps.timestamp_utc.tm_sec)        
+                        delta_t = (datetime.datetime.utcnow()-gps_time).total_seconds()                  
+                        dat.append([time(), delta_t, gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites])
                     else:
-                        dat.append([time(), 0, 0, -1, -1, 0])
+                        dat.append([time(), 0, 0, 0, -1, -1, 0])
                     sleep(1)
                 #print('Writing... \n')
-            f.write('Time_s' + ',' + 'Latitude' + ',' + 'Longitude' + ',' + 'Speed_kts' + ',' + 'GPS_fix' + ',' 'Satellites' + '\n')
+            gps.update()
+                if gps.has_fix:
+
+            f.write('Time_s' + 'Delta_t_sys_minus_GPS' + ',' + 'Latitude' + ',' + 'Longitude' + ',' + 'Speed_kts' + ',' + 'GPS_fix' + ',' 'Satellites' + '\n')
             for d in dat:
-                f.write(str(d[0]) + ',' + str(d[1]) + ',' + str(d[2]) + ',' + str(d[3]) + ',' + str(d[4]) + ',' + str(d[5]) + '\n')
+                f.write(str(d[0]) + ',' + str(d[1]) + ',' + str(d[2]) + ',' + str(d[3]) + ',' + str(d[4]) + ',' + str(d[5]) + str(d[6]) + '\n')
             #print('Closed.. \n')
             dat = []
             f.close()
