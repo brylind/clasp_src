@@ -48,8 +48,9 @@ def GPS():
                         #     gps.timestamp_utc.tm_min,
                         #     gps.timestamp_utc.tm_sec)
                         # print([time(), gps_time, gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites])  # used this for testing - BL
-                        time_delta = float((datetime.datetime.utcnow()-gps_time).total_seconds())
+                        time_delta = (datetime.datetime.utcnow()-gps_time).total_seconds()
                         # print(time_delta)
+                        
                         dat.append([time(), time_delta, gps.hour, gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites])
                     else:
                         print(([time(), 0, 0, 0, -1, -1, 0]))
