@@ -33,13 +33,14 @@ def GPS():
             for j in range(9):
                 for i in range(60):
                     gps.update()
-                    if blah == 1:
-                    # if gps.has_fix:
-                        dat.append([time(), gps.hour, gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites])
+                    # if blah == 1:
+                    if gps.has_fix:
+                        print([time(), gps.hr, gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites])  # used this for testing - BL
+                        # dat.append([time(), gps.hour, gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites])
                     else:
-                        dat.append([time(), 0, 0, 0, -1, -1, 0])
+                        print(([time(), 0, 0, 0, -1, -1, 0]))
+                        # dat.append([time(), 0, 0, 0, -1, -1, 0])
                     sleep(1)
-                    print([time(), gps.hour, gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites])  # used this for testing - BL
                 #print('Writing... \n')
             #     for d in dat:
             #         f.write(str(d[0]) + ',' + str(d[1]) + ',' + str(d[2]) + ',' + str(d[3]) + ',' + str(d[4]) + ',' + str(d[5]) + '\n')
