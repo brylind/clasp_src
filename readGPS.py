@@ -49,9 +49,9 @@ def GPS():
             gps.update()
                 if gps.has_fix:
 
-            f.write('Time_s' + 'Delta_t_sys_minus_GPS' + ',' + 'Latitude' + ',' + 'Longitude' + ',' + 'Speed_kts' + ',' + 'GPS_fix' + ',' 'Satellites' + '\n')
+            f.write('Time_s' + ',' + 'Delta_t_sys_minus_GPS' + ',' + 'Latitude' + ',' + 'Longitude' + ',' + 'Speed_kts' + ',' + 'GPS_fix' + ',' 'Satellites' + '\n')
             for d in dat:
-                f.write(str(d[0]) + ',' + str(d[1]) + ',' + str(d[2]) + ',' + str(d[3]) + ',' + str(d[4]) + ',' + str(d[5]) + str(d[6]) + '\n')
+                f.write(str(d[0]) + ',' + str(d[1]) + ',' + str(d[2]) + ',' + str(d[3]) + ',' + str(d[4]) + ',' + str(d[5]) + ',' + str(d[6]) + '\n')
             #print('Closed.. \n')
             dat = []
             f.close()
