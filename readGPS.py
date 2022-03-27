@@ -33,7 +33,7 @@ def GPS():
             for j in range(2):      # the range(#'s) are the size of the output file (when multiplied)
                 for i in range(60):
                     gps.update()
-                    if gps.has_fix:                                 #gps fix: 0=no, 1=yes, 2=differential fix
+                    if gps.has_fix:     #gps fix: 0=no, 1=yes, 2=differential fix
                         gps_time = datetime.datetime(gps.timestamp_utc.tm_year,
                             gps.timestamp_utc.tm_mon, 
                             gps.timestamp_utc.tm_mday,
@@ -46,9 +46,6 @@ def GPS():
                         dat.append([time(), 0, 0, 0, -1, -1, 0])
                     sleep(1)
                 #print('Writing... \n')
-            gps.update()
-                if gps.has_fix:
-
             f.write('Time_s' + ',' + 'Delta_t_sys_minus_GPS' + ',' + 'Latitude' + ',' + 'Longitude' + ',' + 'Speed_kts' + ',' + 'GPS_fix' + ',' 'Satellites' + '\n')
             for d in dat:
                 f.write(str(d[0]) + ',' + str(d[1]) + ',' + str(d[2]) + ',' + str(d[3]) + ',' + str(d[4]) + ',' + str(d[5]) + ',' + str(d[6]) + '\n')
