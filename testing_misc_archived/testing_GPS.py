@@ -35,9 +35,9 @@ def GPS():
                     gps.update()
                     if blah == 1:
                     # if gps.has_fix:
-                        dat.append([time(), gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites])
+                        dat.append([time(), gps.time, gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites])
                     else:
-                        dat.append([time(), 0, 0, -1, -1, 0])
+                        dat.append([time(), 0, 0, 0, -1, -1, 0])
                     sleep(1)
                     print([time(), gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites])  # used this for testing - BL
                 #print('Writing... \n')
