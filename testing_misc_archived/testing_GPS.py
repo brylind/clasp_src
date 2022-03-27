@@ -35,10 +35,18 @@ def GPS():
                     gps.update()
                     # if blah == 1:
                     if gps.has_fix:
-                        gps_time = "{}:{}:{}".format(
+                        gps_time = datetime.datetime(gps.timestamp_utc.tm_year,
+                            gps.timestamp_utc.tm_mon, 
+                            gps.timestamp_utc.tm_mday,
                             gps.timestamp_utc.tm_hour, 
                             gps.timestamp_utc.tm_min,
                             gps.timestamp_utc.tm_sec)
+                        
+                        
+                        # gps_time = "{}:{}:{}".format(
+                        #     gps.timestamp_utc.tm_hour, 
+                        #     gps.timestamp_utc.tm_min,
+                        #     gps.timestamp_utc.tm_sec)
                         print([time(), gps_time, gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites])  # used this for testing - BL
                         time_delta = datetime.datetime.utcnow()-gps_time
                         print(type(time_delta))
