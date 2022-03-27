@@ -31,7 +31,7 @@ def GPS():
     try:
         while 1:
             for j in range(1):      # the range(#'s) are the size of the output file (when multiplied)
-                for i in range(60):
+                for i in range(10):
                     gps.update()
                     if gps.has_fix:     #gps fix: 0=no, 1=yes, 2=differential fix
             
@@ -40,8 +40,8 @@ def GPS():
                         dat.append([time(), 0, 0, -1, -1, 0])
                     sleep(1)
                 #print('Writing... \n')
-            gps.update()            
             if gps.has_fix:
+                gps.update()
                 gps_time = datetime.datetime(gps.timestamp_utc.tm_year,\
                     gps.timestamp_utc.tm_mon,\
                     gps.timestamp_utc.tm_mday,\
@@ -54,7 +54,7 @@ def GPS():
             print('Delta_t_sys_minus_gps_at_write' + ',' + str(delta_t) + '\n')
             print('Time_s' + ',' + 'Latitude' + ',' + 'Longitude' + ',' + 'Speed_kts' + ',' + 'GPS_fix' + ',' + 'Satellites' + '\n')
             print(dat)
-            
+
             # f.write('Delta_t_sys_minus_gps_at_write' + ',' + str(delta_t) + '\n')
             # f.write('Time_s' + ',' + 'Latitude' + ',' + 'Longitude' + ',' + 'Speed_kts' + ',' + 'GPS_fix' + ',' + 'Satellites' + '\n')
             #for d in dat:
@@ -70,9 +70,9 @@ def GPS():
     except KeyboardInterrupt:
         # f.close()
         print('\n Done Writing \n')
-    except:
-        print('ERROR')
-        pass
+    # except:
+    #     print('ERROR')
+    #     pass
 
 
 if __name__ == '__main__':
