@@ -42,11 +42,11 @@ def GPS():
                 #print('Writing... \n')
             gps.update()            
             if gps.has_fix:
-                gps_time = datetime.datetime(gps.timestamp_utc.tm_year,
-                    gps.timestamp_utc.tm_mon, 
-                    gps.timestamp_utc.tm_mday,
-                    gps.timestamp_utc.tm_hour, 
-                    gps.timestamp_utc.tm_min,
+                gps_time = datetime.datetime(gps.timestamp_utc.tm_year,\
+                    gps.timestamp_utc.tm_mon,\
+                    gps.timestamp_utc.tm_mday,\
+                    gps.timestamp_utc.tm_hour,\
+                    gps.timestamp_utc.tm_min,\
                     gps.timestamp_utc.tm_sec)        
                 delta_t = (datetime.datetime.utcnow()-gps_time).total_seconds()
             else:
