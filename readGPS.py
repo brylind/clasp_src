@@ -24,6 +24,7 @@ def GPS():
     gpsPath = f'/home/pi/glinda_main/dataFiles/gps/{device_hostname}_gpsData_{timestr}.csv'
     f = open(gpsPath,'a+')
     dat = []
+    timedif = []    # difference between system and GPS (important if no internet connection... which updates the system clock)
     # looptime = time()
     #try:
     #print('Reading GPS...\n')
