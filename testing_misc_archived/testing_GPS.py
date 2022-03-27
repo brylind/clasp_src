@@ -35,11 +35,12 @@ def GPS():
                     gps.update()
                     # if blah == 1:
                     if gps.has_fix:
-                        gps_time = float("{}:{}:{}".format(
+                        gps_time = "{}:{}:{}".format(
                             gps.timestamp_utc.tm_hour, 
                             gps.timestamp_utc.tm_min,
-                            gps.timestamp_utc.tm_sec))
+                            gps.timestamp_utc.tm_sec)
                         print([time(), gps_time, gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites])  # used this for testing - BL
+                        print(type(gps_time))
                         # dat.append([time(), gps.hour, gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites])
                     else:
                         print(([time(), 0, 0, 0, -1, -1, 0]))
