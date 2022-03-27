@@ -3,7 +3,7 @@
 
 def GPS():
     from time import sleep, time
-    import adafruit_gps
+    import adafruit_gps                             
     import datetime
     import board
     import busio
@@ -30,7 +30,7 @@ def GPS():
 
     try:
         while 1:
-            for j in range(2):      # the range(#'s) are the size of the output file (when multiplied)
+            for j in range(1):      # the range(#'s) are the size of the output file (when multiplied)
                 for i in range(60):
                     gps.update()
                     if gps.has_fix:     #gps fix: 0=no, 1=yes, 2=differential fix
@@ -40,7 +40,7 @@ def GPS():
                         dat.append([time(), 0, 0, -1, -1, 0])
                     sleep(1)
                 #print('Writing... \n')
-            gps.update()
+            gps.update()            
             if gps.has_fix:
                 gps_time = datetime.datetime(gps.timestamp_utc.tm_year,
                     gps.timestamp_utc.tm_mon, 
