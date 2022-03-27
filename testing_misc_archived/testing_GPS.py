@@ -35,7 +35,7 @@ def GPS():
                     gps.update()
                     # if blah == 1:
                     if gps.has_fix:
-                        gps_time = int("{}.{}.{}".format(
+                        gps_time = float("{}:{}:{}".format(
                             gps.timestamp_utc.tm_hour, 
                             gps.timestamp_utc.tm_min,
                             gps.timestamp_utc.tm_sec))
