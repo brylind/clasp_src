@@ -6,7 +6,7 @@
 
 # does this show 3/15 9:10
 # General Import Statements
-import numpy as np
+import numpy as npd
 from multiprocessing import *
 import board
 import busio
