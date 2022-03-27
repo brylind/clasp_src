@@ -35,7 +35,7 @@ def GPS():
                     gps.update()
                     # if blah == 1:
                     if gps.has_fix:
-                        print(type(gps.timestamp_utc.tm_year), gps.timestamp_utc.tm_year)
+                        # print(type(gps.timestamp_utc.tm_year), gps.timestamp_utc.tm_year)
                         gps_time = datetime.datetime(gps.timestamp_utc.tm_year,
                             gps.timestamp_utc.tm_mon, 
                             gps.timestamp_utc.tm_mday,
