@@ -52,7 +52,7 @@ def GPS():
                         time_delta = (datetime.datetime.utcnow()-gps_time).total_seconds()
                         # print(type(time_delta), time_delta)
                         
-                        dat.append([time(), time_delta, gps.hour, gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites])
+                        dat.append([time(), time_delta, gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites])
                     else:
                         print(([time(), 0, 0, 0, -1, -1, 0]))
                         # dat.append([time(), 0, 0, 0, -1, -1, 0])
