@@ -66,9 +66,9 @@ def GPS():
     except KeyboardInterrupt:
         f.close()
         print('\n Done Writing \n')
-    except:
-        print('ERROR')
-        pass
+    # except:
+    #     print('ERROR')
+    #     pass
 
 
 if __name__ == '__main__':
