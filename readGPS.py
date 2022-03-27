@@ -50,7 +50,7 @@ def GPS():
                     gps.timestamp_utc.tm_sec)        
                 delta_t = (datetime.datetime.utcnow()-gps_time).total_seconds()
             else:
-                delta_t = "N/A"
+                delta_t = 'N/A'
             f.write('Delta_t_sys_minus_gps_at_write' + ',' + str(delta_t) + '\n')
             f.write('Time_s' + ',' + 'Latitude' + ',' + 'Longitude' + ',' + 'Speed_kts' + ',' + 'GPS_fix' + ',' + 'Satellites' + '\n')
             for d in dat:
