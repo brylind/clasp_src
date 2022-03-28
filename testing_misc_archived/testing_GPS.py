@@ -43,7 +43,6 @@ def GPS():
                     sleep(1)
                 #print('Writing... \n')
             if gps.has_fix:
-                gps.update()
                 gps_time = datetime.datetime(gps.timestamp_utc.tm_year,\
                     gps.timestamp_utc.tm_mon,\
                     gps.timestamp_utc.tm_mday,\
