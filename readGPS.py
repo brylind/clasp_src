@@ -9,8 +9,8 @@ def GPS():
     import busio
     import socket
     import serial
-    uart = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=10)
-
+    uart = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=100)
+    
     gps = adafruit_gps.GPS(uart, debug=False) # Use UART/pyserial
     # Turn on the basic GGA and RMC info (what you typically want)
     gps.send_command(b"PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
@@ -52,11 +52,11 @@ def GPS():
             #     delta_t = 'N/A'
             # f.write('Delta_t_sys_minus_gps_at_write' + ',' + str(delta_t) + '\n')
 
-            f.write('Time_s' + ',' + 'Latitude' + ',' + 'Longitude' + ',' + 'Speed_kts' + ',' + 'GPS_fix' + ',' + 'Satellites' + '\n')
-            for d in dat:
-                f.write(str(d[0]) + ',' + str(d[1]) + ',' + str(d[2]) + ',' + str(d[3]) + ',' + str(d[4]) + ',' + str(d[5]) + '\n')
-            #print('Closed.. \n')
-            dat = []
+                f.write('Time_s' + ',' + 'Latitude' + ',' + 'Longitude' + ',' + 'Speed_kts' + ',' + 'GPS_fix' + ',' + 'Satellites' + '\n')
+                for d in dat:
+                    f.write(str(d[0]) + ',' + str(d[1]) + ',' + str(d[2]) + ',' + str(d[3]) + ',' + str(d[4]) + ',' + str(d[5]) + '\n')
+                #print('Closed.. \n')
+                dat = []
             f.close()
             launch_time = datetime.datetime.now()
             timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
