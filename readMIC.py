@@ -15,7 +15,7 @@ def mic():
 	import busio
 	import socket
 	import sys
-
+	import urllib.request
 
 	# I'm using this line instead after setting the baudrate manually in /boot/config.txt
 	i2c = busio.I2C(board.SCL, board.SDA)
@@ -27,7 +27,7 @@ def mic():
 	ads.mode = Mode.CONTINUOUS
 
 	chan = AnalogIn(ads, ADS.P0, ADS.P1)		# differential voltage, channels 0 & 1 specified by JFA on his Github
-	s = 30		# seconds of recording
+	s = 20		# seconds of recording
 
 	device_hostname = socket.gethostname()
 	launch_time = datetime.datetime.now()
@@ -38,18 +38,23 @@ def mic():
 	dat = []
 	try:
 		while True:
+			try:
+				urllib.request.urlopen('http://google.com')
+				internet = 1
+			except:
+				internet = 0
 			start = time()
 			while (time()-start) < s:
-				dat.append([time(), chan.voltage])
+				dat.append([time(), chan.voltage, internet])
 				sleep(1/sample_rate)
 			####################### used for testing
 			# data = pd.DataFrame(dat,columns = ['Time','Signal']) # used this for testing - BL
 			# data.to_csv("testingmic.csv", header=['Time (s)', 'Signal (V)'])  # used for testing - BL
 			# quit()
 			###########################################
-			f.write('Time_s' + ',' + 'Signal_V' + '\n')
+			f.write('Time_s' + ',' + 'Signal_V' + ',' + 'Internet_status' + '\n')
 			for d in dat:
-				f.write(str(d[0]) + ',' + str(d[1]) + '\n')
+				f.write(str(d[0]) + ',' + str(d[1]) + ',' + str(d[2]) + '\n')
 			dat = []
 			f.close()
 			launch_time = datetime.datetime.now()
