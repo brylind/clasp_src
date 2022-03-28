@@ -42,6 +42,7 @@ def GPS():
                 #print('Writing... \n')
             if gps.has_fix:
                 gps.update()
+                start = time()
                 gps_time = datetime.datetime(gps.timestamp_utc.tm_year,\
                     gps.timestamp_utc.tm_mon,\
                     gps.timestamp_utc.tm_mday,\
@@ -49,8 +50,10 @@ def GPS():
                     gps.timestamp_utc.tm_min,\
                     gps.timestamp_utc.tm_sec)        
                 delta_t = (datetime.datetime.utcnow()-gps_time).total_seconds()
+                end = time()
             else:
                 delta_t = 'N/A'
+            print(end-start)    
             print('Delta_t_sys_minus_gps_at_write' + ',' + str(delta_t) + '\n')
             print('Time_s' + ',' + 'Latitude' + ',' + 'Longitude' + ',' + 'Speed_kts' + ',' + 'GPS_fix' + ',' + 'Satellites' + '\n')
             print(dat)
