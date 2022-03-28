@@ -10,7 +10,7 @@ def GPS():
     import socket
     import serial
     # uart = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=10)
-    uart = serial.Serial("/dev/ttyAMA0", baudrate=115200, timeout=10)
+    uart = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=10)
 
     gps = adafruit_gps.GPS(uart, debug=False) # Use UART/pyserial
 
