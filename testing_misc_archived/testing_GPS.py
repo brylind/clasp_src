@@ -9,7 +9,8 @@ def GPS():
     import busio
     import socket
     import serial
-    uart = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=10)
+    #uart = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=10)
+    uart = serial.Serial("/dev/ttyAMA0", baudrate=115200, timeout=10)
 
     gps = adafruit_gps.GPS(uart, debug=False) # Use UART/pyserial
 
@@ -17,7 +18,7 @@ def GPS():
     gps.send_command(b"PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
 
     # Set update rate to once a second (1hz) which is what you typically want.
-    gps.send_command(b"PMTK220,10")
+    gps.send_command(b"PMTK220,100")
     device_hostname = socket.gethostname()
     launch_time = datetime.datetime.now()
     timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
