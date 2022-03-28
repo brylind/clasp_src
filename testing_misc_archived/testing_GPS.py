@@ -19,7 +19,7 @@ def GPS():
     gps.send_command(b"PMTK314,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0")
 
     # Set update rate to once a second (1hz) which is what you typically want.
-    gps.send_command(b"PMTK220,10000")
+    gps.send_command(b"PMTK220,200")
     device_hostname = socket.gethostname()
     launch_time = datetime.datetime.now()
     timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
@@ -43,6 +43,7 @@ def GPS():
                     sleep(1)
                 #print('Writing... \n')
             if gps.has_fix:
+                gps.update()
                 gps_time = datetime.datetime(gps.timestamp_utc.tm_year,\
                     gps.timestamp_utc.tm_mon,\
                     gps.timestamp_utc.tm_mday,\
