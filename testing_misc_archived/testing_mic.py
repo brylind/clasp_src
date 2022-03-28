@@ -2,15 +2,8 @@
 #DOES THIS SHOW  - 3/11 2:55
 import os
 import urllib.request
-			
-# 			def connect(host='http://google.com'):
-#     			try:
-#        				urllib.request.urlopen(host) #Python 3.x
-#         			return True
-#     			except:
-#         			return False
-# # test
-# 			print( "connected" if connect() else "no internet!" )
+
+
 def mic():
 	from adafruit_ads1x15.analog_in import AnalogIn
 	from adafruit_ads1x15.ads1x15 import Mode
