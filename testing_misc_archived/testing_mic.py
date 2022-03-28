@@ -1,8 +1,16 @@
 # Mic Recording Script
 #DOES THIS SHOW  - 3/11 2:55
 import os
-
-
+import urllib.request
+			
+# 			def connect(host='http://google.com'):
+#     			try:
+#        				urllib.request.urlopen(host) #Python 3.x
+#         			return True
+#     			except:
+#         			return False
+# # test
+# 			print( "connected" if connect() else "no internet!" )
 def mic():
 	from adafruit_ads1x15.analog_in import AnalogIn
 	from adafruit_ads1x15.ads1x15 import Mode
@@ -39,13 +47,18 @@ def mic():
 	dat = []
 	try:
 		while True:
+			try:
+				urllib.request.urlopen('http://google.com')
+				internet = 1
+			except:
+				internet = -1
 			start = time()
 			while (time()-start) < s:
-				dat.append([time(), chan.voltage])
+				dat.append([time(), chan.voltage, internet])
 				sleep(1/sample_rate)
 			####################### used for testing
-			data = pd.DataFrame(dat,columns = ['Time','Signal']) # used this for testing - BL
-			data.to_csv("testingmic.csv", header=['Time (s)', 'Signal (V)'])  # used for testing - BL
+			data = pd.DataFrame(dat,columns = ['Time','Signal','Internet_Status']) # used this for testing - BL
+			data.to_csv("testingmic.csv", header=['Time (s)', 'Signal (V)','Internet (1 is true)'])  # used for testing - BL
 			sleep(5)
 
 			os.system('git add "testingmic.csv"; git commit -m "added testingmic.csv"; git push')
