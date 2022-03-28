@@ -49,7 +49,8 @@ def GPS():
                     gps.timestamp_utc.tm_min,\
                     gps.timestamp_utc.tm_sec)        
                 delta_t = (datetime.datetime.utcnow()-gps_time).total_seconds()
-                print(datetime.datetime.utcnow()-gps_time)
+                print(datetime.datetime.utcnow())
+                print(gps_time)
                 end = time()
             else:
                 delta_t = 'N/A'
