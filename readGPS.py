@@ -9,7 +9,7 @@ def GPS():
     import busio
     import socket
     import serial
-    uart = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=10)
+    uart = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=100)
     
     gps = adafruit_gps.GPS(uart, debug=False) # Use UART/pyserial
     # Turn on the basic GGA and RMC info (what you typically want)
