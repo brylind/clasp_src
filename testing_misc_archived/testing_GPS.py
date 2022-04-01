@@ -40,7 +40,7 @@ def GPS():
                         dat.append([time(), gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites])
                     else:
                         dat.append([time(), 0, 0, -1, -1, 0])
-                    sleep(1)
+                    sleep(2)
                 #print('Writing... \n')
             if gps.has_fix:
                 gps.update()
