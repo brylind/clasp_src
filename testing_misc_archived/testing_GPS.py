@@ -16,7 +16,8 @@ def GPS():
 
     # Turn on the basic GGA and RMC info (what you typically want)
     # gps.send_command(b"PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
-    gps.send_command(b"PMTK314,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0")
+    gps.send_command(b"PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0")
+    #gps.send_command(b"PMTK314,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0")
 
     # Set update rate to once a second (1hz) which is what you typically want.
     gps.send_command(b"PMTK220,1000")
@@ -53,8 +54,6 @@ def GPS():
                 delta_t = (datetime.datetime.utcnow()-gps_time).total_seconds()
                 print(f'System time: {datetime.datetime.utcnow()}')
                 print(f'GPS time: {gps_time}')
-                print(f'GPS time from def datetime: {gps.datetime()}')
-                end = time()
             else:
                 delta_t = 'N/A'
             print('Delta_t_sys_minus_gps_at_write' + ',' + str(delta_t) + '\n')
