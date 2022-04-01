@@ -11,8 +11,9 @@ def GPS():
     import serial
     # uart = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=10)
     uart = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=100)
-
+    
     gps = adafruit_gps.GPS(uart, debug=False) # Use UART/pyserial
+    clock = adafruit_gps.clock(uart, debug=False) #
 
     # Turn on the basic GGA and RMC info (what you typically want)
     # gps.send_command(b"PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
@@ -53,6 +54,7 @@ def GPS():
                 delta_t = (datetime.datetime.utcnow()-gps_time).total_seconds()
                 print(f'System time: {datetime.datetime.utcnow()}')
                 print(f'GPS time: {gps_time}')
+                print(f'GPS time from def datetime: {gps.datetime()}')
                 end = time()
             else:
                 delta_t = 'N/A'
