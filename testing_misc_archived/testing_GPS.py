@@ -32,8 +32,8 @@ def GPS():
 
     try:
         while 1:
-            for j in range(1):      # the range(#'s) are the size of the output file (when multiplied)
-                for i in range(15):
+            for j in range(2):      # the range(#'s) are the size of the output file (when multiplied)
+                for i in range(10):
                     gps.update()
                     if gps.has_fix:     #gps fix: 0=no, 1=yes, 2=differential fix
             
