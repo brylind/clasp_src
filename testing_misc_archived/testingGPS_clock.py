@@ -60,8 +60,8 @@ def GPS_clock_update():
                         # dat.append([time(), gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites])
                 else:
                     print('Waiting for GPS fix...')
-                Event().wait(1)
-                # sleep(1)    # this has to be the same as the update rate above (in the send command line)
+                #Event().wait(1)
+                sleep(1)    # this has to be the same as the update rate above (in the send command line)
                 #print('Writing... \n')
                 # gps.update()
                 # if gps.has_fix:
