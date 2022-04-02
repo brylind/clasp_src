@@ -63,6 +63,12 @@ def GPS_clock_update():
                         # )
                         #     gps.timestamp_utc.tm_hour,\
                         print('starting gps timestamp block')
+                        print(f'GPS timstamp year: {gps.timestamp_utc.tm_year}')
+                        print(f'GPS timstamp month: {gps.timestamp_utc.tm_mon}')
+                        print(f'GPS timstamp day: {gps.timestamp_utc.tm_mday}')
+                        print(f'GPS timstamp hour: {gps.timestamp_utc.tm_hour}')
+                        print(f'GPS timstamp minute: {gps.timestamp_utc.tm_min}')
+                        print(f'GPS timstamp second: {gps.timestamp_utc.tm_sec}')
                         gps_time = datetime.datetime(gps.timestamp_utc.tm_year,
                             gps.timestamp_utc.tm_mon,
                             gps.timestamp_utc.tm_mday,
