@@ -63,11 +63,11 @@ def GPS_clock_update():
                         # )
                         #     gps.timestamp_utc.tm_hour,\
                         print('starting gps timestamp block')
-                        gps_time = datetime.datetime(gps.timestamp_utc.tm_year,\
-                            gps.timestamp_utc.tm_mon,\
-                            gps.timestamp_utc.tm_mday,\
-                            gps.timestamp_utc.tm_hour,\
-                            gps.timestamp_utc.tm_min,\
+                        gps_time = datetime.datetime(gps.timestamp_utc.tm_year,
+                            gps.timestamp_utc.tm_mon,
+                            gps.timestamp_utc.tm_mday,
+                            gps.timestamp_utc.tm_hour,
+                            gps.timestamp_utc.tm_min,
                             gps.timestamp_utc.tm_sec)  
                         print('gps timestamp block done')    
                         #print(f'GPS datetime: {gps_time}')       # turns out this gets the time at the moment the gps fixed
