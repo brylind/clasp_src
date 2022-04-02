@@ -52,8 +52,10 @@ def GPS():
 
     launch_time = datetime.datetime.now()
     timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
+    start_path = time()
     gpsPath = f'/home/pi/glinda_main/dataFiles/gps/{internet}{device_hostname}_gpsData_{timestr}{gps_timestamp}.csv'
     f = open(gpsPath,'a+')
+    print(f'time taken to make and open path/file: {time()-start_path}')
     dat = []
 
     try:
@@ -63,9 +65,7 @@ def GPS():
                 for i in range(10):
                     gps.update()
                     if gps.has_fix:     #gps fix: 0=no, 1=yes, 2=differential fix
-                        start_append = time()
                         dat.append([time(), gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites])
-                        print(f'Time taken to append: {time()-start_append}')
                     else:
                         dat.append([time(), 0, 0, -1, -1, 0])
                     sleep(.5)
