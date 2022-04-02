@@ -48,8 +48,9 @@ def GPS_clock_update():
                     if internet == '':
 
                         ## this does something
-                        gps_currenttime = gps.datetime
-
+                        gps_currenttime = str(gps.datetime)
+                        print(gps_currenttime)
+                        
                     #print(f'gps.Datetime type is {type(gps_currenttime)} and the \n'
                     #f'value is : {gps_currenttime}')        
 
