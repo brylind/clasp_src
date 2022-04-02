@@ -45,16 +45,17 @@ def GPS():
                 #print('Writing... \n')
             gps.update()
             if gps.has_fix:
+                gps._update_timestamp_utc()
                 gps_time = datetime.datetime(gps.timestamp_utc.tm_year,\
                     gps.timestamp_utc.tm_mon,\
                     gps.timestamp_utc.tm_mday,\
                     gps.timestamp_utc.tm_hour,\
                     gps.timestamp_utc.tm_min,\
-                    gps.timestamp_utc.tm_sec)        
+                    gps.timestamp_utc.tm_sec)        # turns out this gets the time at the moment the gps fixed
                 delta_t = (datetime.datetime.utcnow()-gps_time).total_seconds()
                 print(f'System time: {datetime.datetime.utcnow()}')
                 print(f'GPS timestamp: {gps_time}')
-                print(gps)
+                # print(gps.hour) # this doesn't work but something simular to this is needed. Its gotta be in there somewhere.
             else:
                 delta_t = 'N/A'
             print('Delta_t_sys_minus_gps_at_write' + ',' + str(delta_t) + '\n')
