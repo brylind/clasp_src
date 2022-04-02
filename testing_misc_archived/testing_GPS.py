@@ -10,6 +10,26 @@ def GPS():
     import serial
     import urllib.request
 
+            # function used after checking for internet (if no internet, return the gps fix timestamp for a reference)
+        # this gps timestamp will not change if the gps maintain fix. But, it can be used to find the offset between the
+        # the GPS time and the system time (which will be way off without internet connection)
+    def gpsTimestampFunc():
+        gps_timestamp = 'None'
+        now = time()
+        while time()-now < 5:
+            gps.update()
+            if gps.has_fixed:
+                gps_time = datetime.datetime(gps.timestamp_utc.tm_year,\
+                    gps.timestamp_utc.tm_mon,\
+                    gps.timestamp_utc.tm_mday,\
+                    gps.timestamp_utc.tm_hour,\
+                    gps.timestamp_utc.tm_min,\
+                    gps.timestamp_utc.tm_sec)  
+                gps_timestamp_string = gps_time.strftime("%Y_%m_%d_%H_%M_%S")
+                gps_timestamp = (f'_GPS_UTCtimestamp_{gps_timestamp_string}')
+                return gps_timestamp                
+            else:
+                pass
     
     uart = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=100)
     
@@ -92,26 +112,7 @@ def GPS():
         print('ERROR')
         pass
 
-        # function used after checking for internet (if no internet, return the gps fix timestamp for a reference)
-        # this gps timestamp will not change if the gps maintain fix. But, it can be used to find the offset between the
-        # the GPS time and the system time (which will be way off without internet connection)
-    def gpsTimestampFunc():
-        gps_timestamp = 'None'
-        now = time()
-        while time()-now < 5:
-            gps.update()
-            if gps.has_fixed:
-                gps_time = datetime.datetime(gps.timestamp_utc.tm_year,\
-                    gps.timestamp_utc.tm_mon,\
-                    gps.timestamp_utc.tm_mday,\
-                    gps.timestamp_utc.tm_hour,\
-                    gps.timestamp_utc.tm_min,\
-                    gps.timestamp_utc.tm_sec)  
-                gps_timestamp_string = gps_time.strftime("%Y_%m_%d_%H_%M_%S")
-                gps_timestamp = (f'_GPS_UTCtimestamp_{gps_timestamp_string}')
-                return gps_timestamp                
-            else:
-                pass
+
 
 
 if __name__ == '__main__':
