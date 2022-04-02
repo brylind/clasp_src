@@ -15,14 +15,12 @@ def GPS():
     def gpsTimestampFunc(gps_obj):
         gps_timestamp = 'None'
         now = time()
-        start_time_loop = time()
         while time()-now < 5:
             gps_obj.update()
             if gps_obj.has_fix:
                 gps_obj.update()
                 gps_time = (f'{gps_obj.timestamp_utc.tm_hour}_{gps_obj.timestamp_utc.tm_min}_{gps_obj.timestamp_utc.tm_sec}')
                 gps_timestamp = (f'_GPS_UTCtimestamp_{gps_time}')
-                print(f'Function loop took {time() - start_time_loop} seconds')
                 return gps_timestamp                
             else:
                 pass
@@ -78,9 +76,10 @@ def GPS():
             #     delta_t = 'N/A'
             # f.write('Delta_t_sys_minus_gps_at_write' + ',' + str(delta_t) + '\n')
 
-
+                start_write = time()
                 for d in dat:
                     f.write(str(d[0]) + ',' + str(d[1]) + ',' + str(d[2]) + ',' + str(d[3]) + ',' + str(d[4]) + ',' + str(d[5]) + '\n')
+                print(f'Time taken to write to file: {time()-start_write}')    
                 #print('Closed.. \n')
             dat = []
             f.close()
