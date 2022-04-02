@@ -61,11 +61,11 @@ def GPS():
             f.write('Time_s' + ',' + 'Latitude' + ',' + 'Longitude' + ',' + 'Speed_kts' + ',' + 'GPS_fix' + ',' + 'Satellites' + '\n')
             for j in range(24):      # the range(#'s) are the size of the output file (when multiplied)
                 for i in range(10):
-                    start_update = time()
                     gps.update()
-                    print(f'Time taken to do a gps update: {time()-start_update}')
                     if gps.has_fix:     #gps fix: 0=no, 1=yes, 2=differential fix
+                        start_append = time()
                         dat.append([time(), gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites])
+                        print(f'Time taken to append: {time()-start_append}')
                     else:
                         dat.append([time(), 0, 0, -1, -1, 0])
                     sleep(.5)
