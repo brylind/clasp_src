@@ -33,7 +33,7 @@ def GPS():
 
     try:
         while 1:
-            for j in range(2):      # the range(#'s) are the size of the output file (when multiplied)
+            for j in range(1):      # the range(#'s) are the size of the output file (when multiplied)
                 for i in range(10):
                     gps.update()
                     if gps.has_fix:     #gps fix: 0=no, 1=yes, 2=differential fix
@@ -54,7 +54,7 @@ def GPS():
                 delta_t = (datetime.datetime.utcnow()-gps_time).total_seconds()
                 print(f'System time: {datetime.datetime.utcnow()}')
                 print(f'GPS timestamp: {gps_time}')
-                print(f'GPS hour: {gps.hour}')
+                print(gps)
             else:
                 delta_t = 'N/A'
             print('Delta_t_sys_minus_gps_at_write' + ',' + str(delta_t) + '\n')
