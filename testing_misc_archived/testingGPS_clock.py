@@ -76,7 +76,7 @@ def GPS_clock_update():
                     
                         dat.append([time(), gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites, 'good_int'])
                     else:
-                        dat.append([time(), gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites, gps_currenttime])
+                        dat.append([time(), gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites, [gps_currenttime]])
                 else:
                     print('Waiting for GPS fix...')
                 #Event().wait(1)
