@@ -37,15 +37,15 @@ def GPS_clock_update():
                 if gps.has_fix:     #gps fix: 0=no, 1=yes, 2=differential fix
                     print(time(), gps.latitude, gps.longitude)
 
-                    # gps_currenttime = gps.datetime
-                    # print(gps_currenttime)        ## this does something
+                    gps_currenttime = gps.datetime
+                    print(gps_currenttime)        ## this does something
 
 
                     #sentence = gps.readline()    ## this also shows a changing epoch times
-                    raw = gps.nmea_sentence
-                    print(f'Raw sentence type: {type(raw)} \n' 
-                    f'Value: {raw}'
-                    )
+                    # raw = gps.nmea_sentence
+                    # print(f'Raw sentence type: {type(raw)} \n' 
+                    # f'Value: {raw}'
+                    # )
 
                     # gps_time = datetime.datetime(gps.timestamp_utc.tm_year,\
                     #     gps.timestamp_utc.tm_mon,\
