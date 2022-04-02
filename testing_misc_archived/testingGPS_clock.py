@@ -29,6 +29,7 @@ def GPS_clock_update():
                 for i in range(1000):
                     gps.update()
                     if gps.has_fix:     #gps fix: 0=no, 1=yes, 2=differential fix
+                        print(time(), gps.latitude, gps.longitude)
                         gps_time = datetime.datetime(gps.timestamp_utc.tm_year,\
                             gps.timestamp_utc.tm_mon,\
                             gps.timestamp_utc.tm_mday,\
