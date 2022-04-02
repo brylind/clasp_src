@@ -25,6 +25,7 @@ def GPS():
                 #     gps.timestamp_utc.tm_sec)  
                 # print(gps_time)
                 gps_timestamp = (f'_GPS_UTCtimestamp_{gps_time}')
+                print('One loop through timestampe function')
                 return gps_timestamp                
             else:
                 pass
