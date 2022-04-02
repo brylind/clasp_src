@@ -79,7 +79,7 @@ def GPS():
                 print('no internet identified')
                 gps_timestamp = gpsTimestampFunc(gps)
                 print('GPS timestamp function done')
-                
+
             launch_time = datetime.datetime.now()
             timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
             gpsPath = f'/home/pi/glinda_main/dataFiles/gps/{internet}{device_hostname}_gpsData_{timestr}{gps_timestamp}.csv'
@@ -94,13 +94,13 @@ def GPS():
         pass
     
     
-    def gpsTimestampFunc(gps_obj):
+    def gpsTimestampFunc(gps):
         gps_timestamp = 'None'
         now = time()
         while time()-now < 5:
-            if gps_obj.has_fix:
-                gps_obj.update()
-                gps_time = (f'{gps_obj.timestamp_utc.tm_hour}_{gps_obj.timestamp_utc.tm_min}_{gps_obj.timestamp_utc.tm_sec}')
+            if gps.has_fix:
+                gps.update()
+                gps_time = (f'{gps.timestamp_utc.tm_hour}_{gps.timestamp_utc.tm_min}_{gps.timestamp_utc.tm_sec}')
                 # gps_time = datetime.datetime(gps.timestamp_utc.tm_year,\
                 #     gps.timestamp_utc.tm_mon,\
                 #     gps.timestamp_utc.tm_mday,\
