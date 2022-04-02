@@ -89,7 +89,7 @@ def GPS_clock_update():
                         print('No internet')
                 else:
                     print('Waiting for GPS fix...')
-                Event().wait(5)
+                sleep(.5)
                 # sleep(5)    # this has to be the same as the update rate above (in the send command line)
                 #print('Writing... \n')
                 # gps.update()
