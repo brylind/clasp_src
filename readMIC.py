@@ -32,26 +32,26 @@ def mic():
 	device_hostname = socket.gethostname()
 	launch_time = datetime.datetime.now()
 	timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
+	try:
+		urllib.request.urlopen('http://google.com')
+		internet = ''
+	except:
+		internet = 'NOINT_'
 	micPath = (f'/home/pi/glinda_main/dataFiles/mic/'
-		f'{device_hostname}_micData_{timestr}.csv')
+		f'{internet}{device_hostname}_micData_{timestr}.csv')
 	f = open(micPath, 'a+')
 	dat = []
 	try:
 		while True:
-			try:
-				urllib.request.urlopen('http://google.com')
-				internet = 1
-			except:
-				internet = 0
 			start = time()
 			while (time()-start) < s:
 				dat.append([time(), chan.voltage, internet])
 				sleep(1/sample_rate)
-			####################### used for testing
+			############################################## used for testing
 			# data = pd.DataFrame(dat,columns = ['Time','Signal']) # used this for testing - BL
 			# data.to_csv("testingmic.csv", header=['Time (s)', 'Signal (V)'])  # used for testing - BL
 			# quit()
-			###########################################
+			##################################################################
 			f.write('Time_s' + ',' + 'Signal_V' + ',' + 'Internet_status' + '\n')
 			for d in dat:
 				f.write(str(d[0]) + ',' + str(d[1]) + ',' + str(d[2]) + '\n')
@@ -59,9 +59,14 @@ def mic():
 			f.close()
 			launch_time = datetime.datetime.now()
 			timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
+			try:
+				urllib.request.urlopen('http://google.com')
+				internet = ''
+			except:
+				internet = 'NOINT_'
 			micPath = (f'/home/pi/glinda_main/dataFiles/mic/'
-				f'{device_hostname}_micData_{timestr}.csv')
-			f = open(micPath, 'a+')
+				f'{internet}{device_hostname}_micData_{timestr}.csv')
+			f = open(micPath, 'a+')			
 
 	except KeyboardInterrupt:
 		f.close()
