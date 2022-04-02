@@ -9,7 +9,25 @@ def GPS():
     import socket
     import serial
     import urllib.request
-
+    
+    def gpsTimestampFunc(gps):
+        gps_timestamp = 'None'
+        now = time()
+        while time()-now < 5:
+            if gps.has_fix:
+                gps.update()
+                gps_time = (f'{gps.timestamp_utc.tm_hour}_{gps.timestamp_utc.tm_min}_{gps.timestamp_utc.tm_sec}')
+                # gps_time = datetime.datetime(gps.timestamp_utc.tm_year,\
+                #     gps.timestamp_utc.tm_mon,\
+                #     gps.timestamp_utc.tm_mday,\
+                #     gps.timestamp_utc.tm_hour,\
+                #     gps.timestamp_utc.tm_min,\
+                #     gps.timestamp_utc.tm_sec)  
+                # print(gps_time)
+                gps_timestamp = (f'_GPS_UTCtimestamp_{gps_time}')
+                return gps_timestamp                
+            else:
+                pass
             # function used after checking for internet (if no internet, return the gps fix timestamp for a reference)
         # this gps timestamp will not change if the gps maintain fix. But, it can be used to find the offset between the
         # the GPS time and the system time (which will be way off without internet connection)
@@ -94,24 +112,7 @@ def GPS():
         pass
     
     
-    def gpsTimestampFunc(gps):
-        gps_timestamp = 'None'
-        now = time()
-        while time()-now < 5:
-            if gps.has_fix:
-                gps.update()
-                gps_time = (f'{gps.timestamp_utc.tm_hour}_{gps.timestamp_utc.tm_min}_{gps.timestamp_utc.tm_sec}')
-                # gps_time = datetime.datetime(gps.timestamp_utc.tm_year,\
-                #     gps.timestamp_utc.tm_mon,\
-                #     gps.timestamp_utc.tm_mday,\
-                #     gps.timestamp_utc.tm_hour,\
-                #     gps.timestamp_utc.tm_min,\
-                #     gps.timestamp_utc.tm_sec)  
-                # print(gps_time)
-                gps_timestamp = (f'_GPS_UTCtimestamp_{gps_time}')
-                return gps_timestamp                
-            else:
-                pass
+
 
 if __name__ == '__main__':
     GPS()
