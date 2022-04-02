@@ -14,11 +14,11 @@ def GPS_clock_update():
     gps = adafruit_gps.GPS(uart, debug=False) # Use UART/pyserial
     # Turn on the basic GGA and RMC info (what you typically want)
     # gps.send_command(b"PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
-    gps.send_command(b"PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0")
+    gps.send_command(b'PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0')
     #gps.send_command(b"PMTK314,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0")
 
     # Set update rate to once a second (1hz) which is what you typically want.
-    gps.send_command(b"PMTK220,1000")
+    gps.send_command(b'PMTK220,1000')
     # launch_time = datetime.datetime.now()
     # f = open(gpsPath,'a+')
     # dat = []
@@ -30,16 +30,19 @@ def GPS_clock_update():
                     gps.update()
                     if gps.has_fix:     #gps fix: 0=no, 1=yes, 2=differential fix
                         print(time(), gps.latitude, gps.longitude)
-                        gps_time = datetime.datetime(gps.timestamp_utc.tm_year,\
-                            gps.timestamp_utc.tm_mon,\
-                            gps.timestamp_utc.tm_mday,\
-                            gps.timestamp_utc.tm_hour,\
-                            gps.timestamp_utc.tm_min,\
-                            gps.timestamp_utc.tm_sec)        # turns out this gets the time at the moment the gps fixed
-                        delta_t = (datetime.datetime.utcnow()-gps_time).total_seconds()
-                        print(f'System time: {datetime.datetime.utcnow()}')
-                        print(f'GPS timestamp: {gps_time}')
-                        print(f'The time difference between GPS/System: {delta_t}')
+                        gps_currenttime = gps.datetime
+                        print(gps_currenttime)
+
+                        # gps_time = datetime.datetime(gps.timestamp_utc.tm_year,\
+                        #     gps.timestamp_utc.tm_mon,\
+                        #     gps.timestamp_utc.tm_mday,\
+                        #     gps.timestamp_utc.tm_hour,\
+                        #     gps.timestamp_utc.tm_min,\
+                        #     gps.timestamp_utc.tm_sec)        # turns out this gets the time at the moment the gps fixed
+                        # delta_t = (datetime.datetime.utcnow()-gps_time).total_seconds()
+                        # print(f'System time: {datetime.datetime.utcnow()}')
+                        # print(f'GPS timestamp: {gps_time}')
+                        # print(f'The time difference between GPS/System: {delta_t}')
                             # dat.append([time(), gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites])
                     else:
                         print('Waiting for GPS fix...')
