@@ -33,16 +33,15 @@ def GPS():
         while time()-now < 5:
             gps.update()
             if gps.has_fix:
-                gps_time = datetime.datetime(gps.timestamp_utc.tm_year,\
-                    gps.timestamp_utc.tm_mon,\
-                    gps.timestamp_utc.tm_mday,\
-                    gps.timestamp_utc.tm_hour,\
-                    gps.timestamp_utc.tm_min,\
-                    gps.timestamp_utc.tm_sec)  
-                print(gps_time)
-                
-                gps_timestamp_string = gps_time.strftime("%Y_%m_%d_%H_%M_%S")
-                gps_timestamp = (f'_GPS_UTCtimestamp_{gps_timestamp_string}')
+                gps_time = (f'{gps.timestamp_utc.tm_hour}_{gps.timestamp_utc.tm_min}_{gps.timestamp_utc.tm_sec}')
+                # gps_time = datetime.datetime(gps.timestamp_utc.tm_year,\
+                #     gps.timestamp_utc.tm_mon,\
+                #     gps.timestamp_utc.tm_mday,\
+                #     gps.timestamp_utc.tm_hour,\
+                #     gps.timestamp_utc.tm_min,\
+                #     gps.timestamp_utc.tm_sec)  
+                # print(gps_time)
+                gps_timestamp = (f'_GPS_UTCtimestamp_{gps_time}')
                 return gps_timestamp                
             else:
                 pass
