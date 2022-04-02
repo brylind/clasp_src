@@ -1,5 +1,4 @@
 # Mic Recording Script
-#HEY BRYCE!
 
 def GPS():
     from time import sleep, time
@@ -27,11 +26,14 @@ def GPS():
     launch_time = datetime.datetime.now()
     timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
     try:
-        urllib.request.urlopen('http://google.com', timeout=5)
+        urllib.request.urlopen('http://google.com', None, timeout=5.1)
         internet = ''
+        gps_timestamp = ''
     except:
         internet = 'NOINT_'
-    gpsPath = f'/home/pi/glinda_main/dataFiles/gps/{internet}{device_hostname}_gpsData_{timestr}.csv'
+        gps_timestamp = gpsTimestampFunc()
+
+    gpsPath = f'/home/pi/glinda_main/dataFiles/gps/{internet}{device_hostname}_gpsData_{timestr}{gps_timestamp}.csv'
     f = open(gpsPath,'a+')
     dat = []
     # looptime = time()
@@ -40,49 +42,73 @@ def GPS():
 
     try:
         while 1:
-            for j in range(3):      # the range(#'s) are the size of the output file (when multiplied)
+            for j in range(1):      # the range(#'s) are the size of the output file (when multiplied)
                 for i in range(60):
                     gps.update()
                     if gps.has_fix:     #gps fix: 0=no, 1=yes, 2=differential fix
-                        if internet == '':
-                            dat.append([time(), gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites, 'internet_good'])
-                        else:
 
-                            dat.append([time(), gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites, ''])
+                        dat.append([time(), gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites])
+
                     else:
                         dat.append([time(), 0, 0, -1, -1, 0])
                     sleep(1)
                 #print('Writing... \n')        
             # if gps.has_fix:
             #     gps.update()
-            #     gps_time = datetime.datetime(gps.timestamp_utc.tm_year,\
-            #         gps.timestamp_utc.tm_mon,\
-            #         gps.timestamp_utc.tm_mday,\
-            #         gps.timestamp_utc.tm_hour,\
-            #         gps.timestamp_utc.tm_min,\
-            #         gps.timestamp_utc.tm_sec)        
+      
             #     delta_t = (datetime.datetime.utcnow()-gps_time).total_seconds()
             # else:
             #     delta_t = 'N/A'
             # f.write('Delta_t_sys_minus_gps_at_write' + ',' + str(delta_t) + '\n')
 
-                f.write('Time_s' + ',' + 'Latitude' + ',' + 'Longitude' + ',' + 'Speed_kts' + ',' + 'GPS_fix' + ',' + 'Satellites' + '\n')
-                for d in dat:
-                    f.write(str(d[0]) + ',' + str(d[1]) + ',' + str(d[2]) + ',' + str(d[3]) + ',' + str(d[4]) + ',' + str(d[5]) + '\n')
-                #print('Closed.. \n')
-                dat = []
+            f.write('Time_s' + ',' + 'Latitude' + ',' + 'Longitude' + ',' + 'Speed_kts' + ',' + 'GPS_fix' + ',' + 'Satellites' + '\n')
+            for d in dat:
+                f.write(str(d[0]) + ',' + str(d[1]) + ',' + str(d[2]) + ',' + str(d[3]) + ',' + str(d[4]) + ',' + str(d[5]) + '\n')
+            #print('Closed.. \n')
+            dat = []
             f.close()
             launch_time = datetime.datetime.now()
             timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
-            gpsPath = f'/home/pi/glinda_main/dataFiles/gps/{device_hostname}_gpsData_{timestr}.csv'
+
+            try:
+                urllib.request.urlopen('http://google.com', None, timeout=5.1)
+                internet = ''
+                gps_timestamp = ''
+            except:
+                internet = 'NOINT_'
+                gps_timestamp = gpsTimestampFunc()
+
+            gpsPath = f'/home/pi/glinda_main/dataFiles/gps/{internet}{device_hostname}_gpsData_{timestr}{gps_timestamp}.csv'
             f = open(gpsPath,'a+')
             print('NEW GPS FILE')
+
     except KeyboardInterrupt:
         f.close()
         print('\n Done Writing \n')
-    # except:
-    #     print('ERROR')
-    #     pass
+    except:
+        print('ERROR')
+        pass
+
+        # function used after checking for internet (if no internet, return the gps fix timestamp for a reference)
+        # this gps timestamp will not change if the gps maintain fix. But, it can be used to find the offset between the
+        # the GPS time and the system time (which will be way off without internet connection)
+    def gpsTimestampFunc():
+        gps_timestamp = 'None'
+        now = time()
+        while time()-now < 5:
+            gps.update()
+            if gps.has_fixed:
+                gps_time = datetime.datetime(gps.timestamp_utc.tm_year,\
+                    gps.timestamp_utc.tm_mon,\
+                    gps.timestamp_utc.tm_mday,\
+                    gps.timestamp_utc.tm_hour,\
+                    gps.timestamp_utc.tm_min,\
+                    gps.timestamp_utc.tm_sec)  
+                gps_timestamp_string = gps_time.strftime("%Y_%m_%d_%H_%M_%S")
+                gps_timestamp = (f'_GPS_UTCtimestamp_{gps_timestamp_string}')
+                return gps_timestamp                
+            else:
+                pass
 
 
 if __name__ == '__main__':
