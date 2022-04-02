@@ -31,9 +31,12 @@ def GPS():
         gps_timestamp = ''
     except:
         internet = 'NOINT_'
+        print('no internet identified')
         gps_timestamp = gpsTimestampFunc()
+        print('GPS timestamp function done')
 
     gpsPath = f'/home/pi/glinda_main/dataFiles/gps/{internet}{device_hostname}_gpsData_{timestr}{gps_timestamp}.csv'
+    print('gpsPath made')
     f = open(gpsPath,'a+')
     dat = []
     # looptime = time()
