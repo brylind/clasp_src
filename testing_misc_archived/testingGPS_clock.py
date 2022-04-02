@@ -8,7 +8,7 @@ def GPS_clock_update():
     import busio
     import socket
     import serial
-    from threading import Event
+    # from threading import Event
     import urllib.request
     # uart = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=10)
     uart = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=1000)
@@ -62,13 +62,14 @@ def GPS_clock_update():
                         # f'Value: {raw}'
                         # )
                         #     gps.timestamp_utc.tm_hour,\
-
+                        print('starting gps timestamp block')
                         gps_time = datetime.datetime(gps.timestamp_utc.tm_year,\
                             gps.timestamp_utc.tm_mon,\
                             gps.timestamp_utc.tm_mday,\
                             gps.timestamp_utc.tm_hour,\
                             gps.timestamp_utc.tm_min,\
                             gps.timestamp_utc.tm_sec)  
+                        print('gps timestamp block done')    
                         #print(f'GPS datetime: {gps_time}')       # turns out this gets the time at the moment the gps fixed
                         # delta_t = (datetime.datetime.utcnow()-gps_time).total_seconds()
                         # print(f'System time: {datetime.datetime.utcnow()}')
