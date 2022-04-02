@@ -23,7 +23,7 @@ def GPS_clock_update():
     # gps.send_command(b"PMTK314,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0")
 
     # Set update rate to once a second (1hz) which is what you typically want.
-    gps.send_command(b'PMTK220, 2000')
+    gps.send_command(b'PMTK220, 800')
     # launch_time = datetime.datetime.now()
     # f = open(gpsPath,'a+')
     # dat = []
@@ -60,7 +60,7 @@ def GPS_clock_update():
                         # dat.append([time(), gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites])
                 else:
                     print('Waiting for GPS fix...')
-                Event().wait(.9)
+                Event.wait(2)
                 
                 # sleep(1)    # this has to be the same as the update rate above (in the send command line)
                 #print('Writing... \n')
