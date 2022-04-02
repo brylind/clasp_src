@@ -40,9 +40,9 @@ def GPS_clock_update():
                     # print(gps_currenttime)        ## this does something
 
 
-                    sentence = gps.readline()    ## this also shows a changing epoch times
-                    _parse_rmc(sentence)
-                    # print(hey)
+                    #sentence = gps.readline()    ## this also shows a changing epoch times
+                    raw = gps.nmea_sentence
+                    print(raw)
 
                     # gps_time = datetime.datetime(gps.timestamp_utc.tm_year,\
                     #     gps.timestamp_utc.tm_mon,\
