@@ -38,7 +38,7 @@ def GPS_clock_update():
     except:
         internet = 'NOINT_'    
 
-    i=1
+    i=2
     try:
         while i>1:
 
@@ -91,7 +91,7 @@ def GPS_clock_update():
 
                 # # f.write('Delta_t_sys_minus_gps_at_write' + ',' + str(delta_t) + '\n')
                 # # f.write('Time_s' + ',' + 'Latitude' + ',' + 'Longitude' + ',' + 'Speed_kts' + ',' + 'GPS_fix' + ',' + 'Satellites' + '\n')
-        i=2                
+        i=0              
         for d in dat:
             print(str(d[0]) + ',' + str(d[1]) + ',' + str(d[2]) + ',' + str(d[3]) + ',' + str(d[4]) + ',' + str(d[5]) + ',' + str(d[6]) + '\n')
         print('Closed.. \n')
