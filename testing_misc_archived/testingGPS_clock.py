@@ -36,10 +36,12 @@ def GPS_clock_update():
                 if gps.has_fix:     #gps fix: 0=no, 1=yes, 2=differential fix
                     #print(time(), gps.latitude, gps.longitude)
 
-                    # gps_currenttime = gps.datetime()
-                    # print(gps_currenttime)        ## this does something
-                    sentence = gps.readline()
-                    print(sentence)
+                    gps_currenttime = gps.datetime.now()
+                    print(gps_currenttime)        ## this does something
+
+
+                    # sentence = gps.readline()    ## this also shows a changing epoch times
+                    # print(sentence)
 
                     # gps_time = datetime.datetime(gps.timestamp_utc.tm_year,\
                     #     gps.timestamp_utc.tm_mon,\
@@ -54,7 +56,7 @@ def GPS_clock_update():
                         # dat.append([time(), gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites])
                 else:
                     print('Waiting for GPS fix...')
-                sleep(.01)
+                sleep(1)
                 #print('Writing... \n')
                 # gps.update()
                 # if gps.has_fix:
