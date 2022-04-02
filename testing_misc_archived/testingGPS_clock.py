@@ -16,8 +16,10 @@ def GPS_clock_update():
     # gps.send_command(b"PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
 
     # get only rmc data
-    gps.send_command(b'PMTK314,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0')
-    #gps.send_command(b"PMTK314,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0")
+    #gps.send_command(b'PMTK314,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0')
+
+    # get all data
+    gps.send_command(b"PMTK314,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0")
 
     # Set update rate to once a second (1hz) which is what you typically want.
     gps.send_command(b'PMTK220,1000')
@@ -32,7 +34,7 @@ def GPS_clock_update():
             for i in range(1000):
                 gps.update()
                 if gps.has_fix:     #gps fix: 0=no, 1=yes, 2=differential fix
-                    print(time(), gps.latitude, gps.longitude)
+                    #print(time(), gps.latitude, gps.longitude)
 
                     # gps_currenttime = gps.datetime()
                     # print(gps_currenttime)        ## this does something
