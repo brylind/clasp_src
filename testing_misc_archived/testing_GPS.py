@@ -39,6 +39,8 @@ def GPS():
                     gps.timestamp_utc.tm_hour,\
                     gps.timestamp_utc.tm_min,\
                     gps.timestamp_utc.tm_sec)  
+                print(gps_time)
+                
                 gps_timestamp_string = gps_time.strftime("%Y_%m_%d_%H_%M_%S")
                 gps_timestamp = (f'_GPS_UTCtimestamp_{gps_timestamp_string}')
                 return gps_timestamp                
