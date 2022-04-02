@@ -49,8 +49,8 @@ def GPS_clock_update():
 
                         ## this does something
                         gps_currenttime = str(gps.datetime)
-                        print(gps_currenttime)
-                        
+                        print(f'Type: {type(gps_currenttime)} \n Value: {gps_currenttime}')
+
                     #print(f'gps.Datetime type is {type(gps_currenttime)} and the \n'
                     #f'value is : {gps_currenttime}')        
 
