@@ -62,24 +62,25 @@ def GPS_clock_update():
                         # f'Value: {raw}'
                         # )
                         #     gps.timestamp_utc.tm_hour,\
-                        print('starting gps timestamp block')
-                        print(f'GPS timstamp year: {gps.timestamp_utc.tm_year}')
-                        print(f'GPS timstamp month: {gps.timestamp_utc.tm_mon}')
-                        print(f'GPS timstamp day: {gps.timestamp_utc.tm_mday}')
-                        print(f'GPS timstamp hour: {gps.timestamp_utc.tm_hour}')
-                        print(f'GPS timstamp minute: {gps.timestamp_utc.tm_min}')
-                        print(f'GPS timstamp second: {gps.timestamp_utc.tm_sec}')
-                        gps_time = datetime.datetime(gps.timestamp_utc.tm_year,
-                            gps.timestamp_utc.tm_mon,
-                            gps.timestamp_utc.tm_mday,
-                            gps.timestamp_utc.tm_hour,
-                            gps.timestamp_utc.tm_min,
-                            gps.timestamp_utc.tm_sec)  
-                        print('gps timestamp block done')    
+
+                        # print('starting gps timestamp block')
+                        # print(f'GPS timstamp year: {gps.timestamp_utc.tm_year}')
+                        # print(f'GPS timstamp month: {gps.timestamp_utc.tm_mon}')
+                        # print(f'GPS timstamp day: {gps.timestamp_utc.tm_mday}')
+                        gps.update()
+                        gps_time = (f'{gps.timestamp_utc.tm_hour}_{gps.timestamp_utc.tm_min}_{gps.timestamp_utc.tm_sec}')
+                        print(gps_time)
+
+                        # gps_time = datetime.datetime(gps.timestamp_utc.tm_year,
+                        #     gps.timestamp_utc.tm_mon,
+                        #     gps.timestamp_utc.tm_mday,
+                        #     gps.timestamp_utc.tm_hour,
+                        #     gps.timestamp_utc.tm_min,
+                        #     gps.timestamp_utc.tm_sec)  
                         #print(f'GPS datetime: {gps_time}')       # turns out this gets the time at the moment the gps fixed
                         # delta_t = (datetime.datetime.utcnow()-gps_time).total_seconds()
                         # print(f'System time: {datetime.datetime.utcnow()}')
-                        print(f'GPS timestamp: {gps_time}')
+                        # print(f'GPS timestamp: {gps_time}')
                         # print(f'The time difference between GPS/System: {delta_t}')
                     
                         #dat.append([time(), gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites, 'good_int'])
