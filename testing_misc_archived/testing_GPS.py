@@ -52,10 +52,8 @@ def GPS():
 
     launch_time = datetime.datetime.now()
     timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
-    start_path = time()
     gpsPath = f'/home/pi/glinda_main/dataFiles/gps/{internet}{device_hostname}_gpsData_{timestr}{gps_timestamp}.csv'
     f = open(gpsPath,'a+')
-    print(f'time taken to make and open path/file: {time()-start_path}')
     dat = []
 
     try:
