@@ -37,7 +37,6 @@ def GPS():
                 for i in range(5):
                     gps.update()
                     if gps.has_fix:     #gps fix: 0=no, 1=yes, 2=differential fix
-            
                         dat.append([time(), gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites])
                     else:
                         dat.append([time(), 0, 0, -1, -1, 0])
