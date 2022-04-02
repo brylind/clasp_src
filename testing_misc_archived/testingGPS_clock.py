@@ -9,6 +9,7 @@ def GPS_clock_update():
     import socket
     import serial
     from threading import Event
+    import urllib.request
     # uart = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=10)
     uart = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=1000)
     
@@ -26,22 +27,31 @@ def GPS_clock_update():
     gps.send_command(b'PMTK220, 1000')
     # launch_time = datetime.datetime.now()
     # f = open(gpsPath,'a+')
-    # dat = []
+    dat = []
   
 
-    try:
-        while 1:
 
-            for i in range(1000):
+
+    try:
+        urllib.request.urlopen('http://google.com', timeout=5)
+        internet = ''
+    except:
+        internet = 'NOINT_'    
+
+    i=1
+    try:
+        while i>1:
+
+            for i in range(10):
                 gps.update()
                 if gps.has_fix:     #gps fix: 0=no, 1=yes, 2=differential fix
-                    print(time(), gps.latitude, gps.longitude)
+                    if internet == '':
 
                         ## this does something
-                    gps_currenttime = gps.datetime
+                        gps_currenttime = gps.datetime
 
-                    print(f'gps.Datetime type is {type(gps_currenttime)} and the \n'
-                    f'value is : {gps_currenttime}')        
+                    #print(f'gps.Datetime type is {type(gps_currenttime)} and the \n'
+                    #f'value is : {gps_currenttime}')        
 
 
                     #sentence = gps.readline()    ## this also shows a changing epoch times
@@ -49,18 +59,21 @@ def GPS_clock_update():
                     # print(f'Raw sentence type: {type(raw)} \n' 
                     # f'Value: {raw}'
                     # )
+                    #     gps.timestamp_utc.tm_hour,\
 
                     # gps_time = datetime.datetime(gps.timestamp_utc.tm_year,\
                     #     gps.timestamp_utc.tm_mon,\
                     #     gps.timestamp_utc.tm_mday,\
-                    #     gps.timestamp_utc.tm_hour,\
                     #     gps.timestamp_utc.tm_min,\
                     #     gps.timestamp_utc.tm_sec)        # turns out this gets the time at the moment the gps fixed
                     # delta_t = (datetime.datetime.utcnow()-gps_time).total_seconds()
                     # print(f'System time: {datetime.datetime.utcnow()}')
                     # print(f'GPS timestamp: {gps_time}')
                     # print(f'The time difference between GPS/System: {delta_t}')
-                        # dat.append([time(), gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites])
+                    
+                        dat.append([time(), gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites, 'good_int'])
+                    else:
+                        dat.append([time(), gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites, gps_currenttime])
                 else:
                     print('Waiting for GPS fix...')
                 #Event().wait(1)
@@ -78,9 +91,10 @@ def GPS_clock_update():
 
                 # # f.write('Delta_t_sys_minus_gps_at_write' + ',' + str(delta_t) + '\n')
                 # # f.write('Time_s' + ',' + 'Latitude' + ',' + 'Longitude' + ',' + 'Speed_kts' + ',' + 'GPS_fix' + ',' + 'Satellites' + '\n')
-                # #for d in dat:
-                #     # f.write(str(d[0]) + ',' + str(d[1]) + ',' + str(d[2]) + ',' + str(d[3]) + ',' + str(d[4]) + ',' + str(d[5]) + ',' + str(d[6]) + '\n')
-                # #print('Closed.. \n')
+        i=2                
+        for d in dat:
+            print(str(d[0]) + ',' + str(d[1]) + ',' + str(d[2]) + ',' + str(d[3]) + ',' + str(d[4]) + ',' + str(d[5]) + ',' + str(d[6]) + '\n')
+        print('Closed.. \n')
                 # dat = []
                 # # f.close()
                 # launch_time = datetime.datetime.now()
