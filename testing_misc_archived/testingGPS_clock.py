@@ -8,6 +8,7 @@ def GPS_clock_update():
     import busio
     import socket
     import serial
+    from threading import Event
     # uart = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=10)
     uart = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=1000)
     
@@ -59,7 +60,9 @@ def GPS_clock_update():
                         # dat.append([time(), gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites])
                 else:
                     print('Waiting for GPS fix...')
-                sleep(1)    # this has to be the same as the update rate above (in the send command line)
+                Event().wait(1)
+                
+                # sleep(1)    # this has to be the same as the update rate above (in the send command line)
                 #print('Writing... \n')
                 # gps.update()
                 # if gps.has_fix:
