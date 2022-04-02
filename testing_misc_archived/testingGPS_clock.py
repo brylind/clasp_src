@@ -9,7 +9,7 @@ def GPS_clock_update():
     import socket
     import serial
     # uart = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=10)
-    uart = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=100)
+    uart = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=1000)
     
     gps = adafruit_gps.GPS(uart, debug=False) # Use UART/pyserial
     # Turn on the basic GGA and RMC info (what you typically want)
@@ -22,7 +22,7 @@ def GPS_clock_update():
     # gps.send_command(b"PMTK314,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0")
 
     # Set update rate to once a second (1hz) which is what you typically want.
-    gps.send_command(b'PMTK220,1000')
+    gps.send_command(b'PMTK220,5000')
     # launch_time = datetime.datetime.now()
     # f = open(gpsPath,'a+')
     # dat = []
