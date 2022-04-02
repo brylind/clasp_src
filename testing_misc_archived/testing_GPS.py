@@ -32,7 +32,7 @@ def GPS():
         now = time()
         while time()-now < 5:
             gps.update()
-            if gps.has_fixed:
+            if gps.has_fix:
                 gps_time = datetime.datetime(gps.timestamp_utc.tm_year,\
                     gps.timestamp_utc.tm_mon,\
                     gps.timestamp_utc.tm_mday,\
@@ -44,7 +44,7 @@ def GPS():
                 return gps_timestamp                
             else:
                 pass
-                
+
     device_hostname = socket.gethostname()
     launch_time = datetime.datetime.now()
     timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
