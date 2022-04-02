@@ -41,7 +41,7 @@ def GPS_clock_update():
     k=2
     try:
         while k>1:
-            for i in range(10):
+            for i in range(30):
                 gps.update()
                 if gps.has_fix:     #gps fix: 0=no, 1=yes, 2=differential fix
                     if internet == '':
@@ -90,7 +90,7 @@ def GPS_clock_update():
                 else:
                     print('Waiting for GPS fix...')
                 #Event().wait(1)
-                sleep(1)    # this has to be the same as the update rate above (in the send command line)
+                sleep(5)    # this has to be the same as the update rate above (in the send command line)
                 #print('Writing... \n')
                 # gps.update()
                 # if gps.has_fix:
