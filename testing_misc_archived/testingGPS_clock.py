@@ -42,7 +42,9 @@ def GPS_clock_update():
 
                     #sentence = gps.readline()    ## this also shows a changing epoch times
                     raw = gps.nmea_sentence
-                    print(raw)
+                    print(f'Raw sentence type: {type(raw)} \n' 
+                    f'Value: {raw}'
+                    )
 
                     # gps_time = datetime.datetime(gps.timestamp_utc.tm_year,\
                     #     gps.timestamp_utc.tm_mon,\
