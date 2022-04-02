@@ -68,9 +68,11 @@ def GPS_clock_update():
     except KeyboardInterrupt:
         # f.close()
         print('\n Done Writing \n')
-    # except:
-    #     print('ERROR')
-    #     pass
+        quit()
+    
+    except:
+        print('ERROR')
+        pass
 
 
 if __name__ == '__main__':
