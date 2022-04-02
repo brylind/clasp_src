@@ -38,49 +38,51 @@ def GPS_clock_update():
     except:
         internet = 'NOINT_'    
 
-    i=2
+    k=2
     try:
-        while i>1:
-
+        while k>1:
             for i in range(10):
                 gps.update()
                 if gps.has_fix:     #gps fix: 0=no, 1=yes, 2=differential fix
                     if internet == '':
 
                         ## this does something
-                        gps_currenttime = str(gps.datetime)
-                        print(f'Type: {type(gps_currenttime)} \n Value: {gps_currenttime}')
-                        a = 'imastring'
-                        print(f'###### \n Normal string type is: {type(a)} \n ######### \n')
+                        # gps_currenttime = str(gps.datetime)
+                        # print(f'Type: {type(gps_currenttime)} \n Value: {gps_currenttime}')
+                        # a = 'imastring'
+                        # print(f'###### \n Normal string type is: {type(a)} \n ######### \n')
 
-                    #print(f'gps.Datetime type is {type(gps_currenttime)} and the \n'
-                    #f'value is : {gps_currenttime}')        
+                        #print(f'gps.Datetime type is {type(gps_currenttime)} and the \n'
+                        #f'value is : {gps_currenttime}')        
 
 
-                    #sentence = gps.readline()    ## this also shows a changing epoch times
-                    # raw = gps.nmea_sentence
-                    # print(f'Raw sentence type: {type(raw)} \n' 
-                    # f'Value: {raw}'
-                    # )
-                    #     gps.timestamp_utc.tm_hour,\
+                        #sentence = gps.readline()    ## this also shows a changing epoch times
+                        # raw = gps.nmea_sentence
+                        # print(f'Raw sentence type: {type(raw)} \n' 
+                        # f'Value: {raw}'
+                        # )
+                        #     gps.timestamp_utc.tm_hour,\
 
-                    # gps_time = datetime.datetime(gps.timestamp_utc.tm_year,\
-                    #     gps.timestamp_utc.tm_mon,\
-                    #     gps.timestamp_utc.tm_mday,\
-                    #     gps.timestamp_utc.tm_min,\
-                    #     gps.timestamp_utc.tm_sec)        # turns out this gets the time at the moment the gps fixed
-                    # delta_t = (datetime.datetime.utcnow()-gps_time).total_seconds()
-                    # print(f'System time: {datetime.datetime.utcnow()}')
-                    # print(f'GPS timestamp: {gps_time}')
-                    # print(f'The time difference between GPS/System: {delta_t}')
+                        gps_time = datetime.datetime(gps.timestamp_utc.tm_year,\
+                            gps.timestamp_utc.tm_mon,\
+                            gps.timestamp_utc.tm_mday,\
+                            gps.timestamp_utc.tm_hour,\
+                            gps.timestamp_utc.tm_min,\
+                            gps.timestamp_utc.tm_sec)  
+                        #print(f'GPS datetime: {gps_time}')       # turns out this gets the time at the moment the gps fixed
+                        # delta_t = (datetime.datetime.utcnow()-gps_time).total_seconds()
+                        # print(f'System time: {datetime.datetime.utcnow()}')
+                        print(f'GPS timestamp: {gps_time}')
+                        # print(f'The time difference between GPS/System: {delta_t}')
                     
-                        dat.append([time(), gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites, 'good_int'])
+                        #dat.append([time(), gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites, 'good_int'])
                     else:
-                        dat.append([time(), gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites, [gps_currenttime]])
+                        #dat.append([time(), gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites, [gps_currenttime]])
+                        print('No internet')
                 else:
                     print('Waiting for GPS fix...')
                 #Event().wait(1)
-                sleep(.9)    # this has to be the same as the update rate above (in the send command line)
+                sleep(1)    # this has to be the same as the update rate above (in the send command line)
                 #print('Writing... \n')
                 # gps.update()
                 # if gps.has_fix:
@@ -94,10 +96,10 @@ def GPS_clock_update():
 
                 # # f.write('Delta_t_sys_minus_gps_at_write' + ',' + str(delta_t) + '\n')
                 # # f.write('Time_s' + ',' + 'Latitude' + ',' + 'Longitude' + ',' + 'Speed_kts' + ',' + 'GPS_fix' + ',' + 'Satellites' + '\n')
-            i=0              
-        for d in dat:
-            print(str(d[0]) + ',' + str(d[1]) + ',' + str(d[2]) + ',' + str(d[3]) + ',' + str(d[4]) + ',' + str(d[5]) + ',' + str(d[6]) + '\n')
-        print('Closed.. \n')
+            k=0              
+        # for d in dat:
+        #     print(str(d[0]) + ',' + str(d[1]) + ',' + str(d[2]) + ',' + str(d[3]) + ',' + str(d[4]) + ',' + str(d[5]) + ',' + str(d[6]) + '\n')
+        # print('Closed.. \n')
                 # dat = []
                 # # f.close()
                 # launch_time = datetime.datetime.now()
