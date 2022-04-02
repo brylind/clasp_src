@@ -34,7 +34,7 @@ def GPS_clock_update():
             for i in range(1000):
                 gps.update()
                 if gps.has_fix:     #gps fix: 0=no, 1=yes, 2=differential fix
-                    #print(time(), gps.latitude, gps.longitude)
+                    print(time(), gps.latitude, gps.longitude)
 
                     # gps_currenttime = gps.datetime
                     # print(gps_currenttime)        ## this does something
@@ -59,7 +59,7 @@ def GPS_clock_update():
                         # dat.append([time(), gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites])
                 else:
                     print('Waiting for GPS fix...')
-                sleep(.2)    # this has to be the same as the update rate above (in the send command line)
+                sleep(1)    # this has to be the same as the update rate above (in the send command line)
                 #print('Writing... \n')
                 # gps.update()
                 # if gps.has_fix:
