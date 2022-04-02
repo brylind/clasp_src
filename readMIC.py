@@ -33,7 +33,7 @@ def mic():
 	launch_time = datetime.datetime.now()
 	timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
 	try:
-		urllib.request.urlopen('http://google.com', timeout = 5)
+		urllib.request.urlopen('http://google.com', None, timeout=5.1)
 		internet = ''
 	except:
 		internet = 'NOINT_'
@@ -60,7 +60,7 @@ def mic():
 			launch_time = datetime.datetime.now()
 			timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
 			try:
-				urllib.request.urlopen('http://google.com', timeout = 5)
+				urllib.request.urlopen('http://google.com', None, timeout=5.1)
 				internet = ''
 			except:
 				internet = 'NOINT_'

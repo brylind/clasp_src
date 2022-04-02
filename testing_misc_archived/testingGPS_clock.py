@@ -33,7 +33,7 @@ def GPS_clock_update():
 
 
     try:
-        urllib.request.urlopen('http://google.com', timeout=5)
+        urllib.request.urlopen('http://google.com', None, timeout=5)
         internet = ''
     except:
         internet = 'NOINT_'    
