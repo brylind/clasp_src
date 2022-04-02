@@ -10,22 +10,14 @@ def GPS():
     import serial
     import urllib.request
     
-    def gpsTimestampFunc(gps):
+    def gpsTimestampFunc(gps_obj):
         gps_timestamp = 'None'
         now = time()
         while time()-now < 5:
-            if gps.has_fix:
-                gps.update()
-                gps_time = (f'{gps.timestamp_utc.tm_hour}_{gps.timestamp_utc.tm_min}_{gps.timestamp_utc.tm_sec}')
-                # gps_time = datetime.datetime(gps.timestamp_utc.tm_year,\
-                #     gps.timestamp_utc.tm_mon,\
-                #     gps.timestamp_utc.tm_mday,\
-                #     gps.timestamp_utc.tm_hour,\
-                #     gps.timestamp_utc.tm_min,\
-                #     gps.timestamp_utc.tm_sec)  
-                # print(gps_time)
+            if gps_obj.has_fix:
+                gps_obj.update()
+                gps_time = (f'{gps_obj.timestamp_utc.tm_hour}_{gps_obj.timestamp_utc.tm_min}_{gps_obj.timestamp_utc.tm_sec}')
                 gps_timestamp = (f'_GPS_UTCtimestamp_{gps_time}')
-                print('One loop through timestampe function')
                 return gps_timestamp                
             else:
                 pass
