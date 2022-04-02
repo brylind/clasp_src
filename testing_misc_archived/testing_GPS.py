@@ -13,6 +13,20 @@ def GPS():
             # function used after checking for internet (if no internet, return the gps fix timestamp for a reference)
         # this gps timestamp will not change if the gps maintain fix. But, it can be used to find the offset between the
         # the GPS time and the system time (which will be way off without internet connection)
+
+    
+    uart = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=100)
+    
+    gps = adafruit_gps.GPS(uart, debug=False) # Use UART/pyserial
+    # Turn on the basic GGA and RMC info (what you typically want)
+    gps.send_command(b"PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
+    
+    # gps.send_command(b"PMTK314,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0")
+
+    # Set update rate to once a second (1hz) which is what you typically want.
+    gps.send_command(b"PMTK220,1000")
+
+
     def gpsTimestampFunc():
         gps_timestamp = 'None'
         now = time()
@@ -30,18 +44,7 @@ def GPS():
                 return gps_timestamp                
             else:
                 pass
-    
-    uart = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=100)
-    
-    gps = adafruit_gps.GPS(uart, debug=False) # Use UART/pyserial
-    # Turn on the basic GGA and RMC info (what you typically want)
-    gps.send_command(b"PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
-    
-    # gps.send_command(b"PMTK314,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0")
-
-    # Set update rate to once a second (1hz) which is what you typically want.
-    gps.send_command(b"PMTK220,1000")
-
+                
     device_hostname = socket.gethostname()
     launch_time = datetime.datetime.now()
     timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
