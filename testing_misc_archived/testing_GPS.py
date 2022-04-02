@@ -24,31 +24,10 @@ def GPS():
     # gps.send_command(b"PMTK314,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0")
 
     # Set update rate to once a second (1hz) which is what you typically want.
-    gps.send_command(b"PMTK220,1000")
-
-
-    def gpsTimestampFunc():
-        gps_timestamp = 'None'
-        now = time()
-        while time()-now < 5:
-            gps.update()
-            if gps.has_fix:
-                gps_time = (f'{gps.timestamp_utc.tm_hour}_{gps.timestamp_utc.tm_min}_{gps.timestamp_utc.tm_sec}')
-                # gps_time = datetime.datetime(gps.timestamp_utc.tm_year,\
-                #     gps.timestamp_utc.tm_mon,\
-                #     gps.timestamp_utc.tm_mday,\
-                #     gps.timestamp_utc.tm_hour,\
-                #     gps.timestamp_utc.tm_min,\
-                #     gps.timestamp_utc.tm_sec)  
-                # print(gps_time)
-                gps_timestamp = (f'_GPS_UTCtimestamp_{gps_time}')
-                return gps_timestamp                
-            else:
-                pass
+    gps.send_command(b"PMTK220,2000")
 
     device_hostname = socket.gethostname()
-    launch_time = datetime.datetime.now()
-    timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
+
     try:
         urllib.request.urlopen('http://google.com', None, timeout=5.1)
         internet = ''
@@ -56,16 +35,14 @@ def GPS():
     except:
         internet = 'NOINT_'
         print('no internet identified')
-        gps_timestamp = gpsTimestampFunc()
+        gps_timestamp = gpsTimestampFunc(gps)
         print('GPS timestamp function done')
 
+    launch_time = datetime.datetime.now()
+    timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
     gpsPath = f'/home/pi/glinda_main/dataFiles/gps/{internet}{device_hostname}_gpsData_{timestr}{gps_timestamp}.csv'
-    print('gpsPath made')
     f = open(gpsPath,'a+')
     dat = []
-    # looptime = time()
-    #try:
-    #print('Reading GPS...\n')
 
     try:
         while 1:
@@ -73,9 +50,7 @@ def GPS():
                 for i in range(60):
                     gps.update()
                     if gps.has_fix:     #gps fix: 0=no, 1=yes, 2=differential fix
-
                         dat.append([time(), gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites])
-
                     else:
                         dat.append([time(), 0, 0, -1, -1, 0])
                     sleep(1)
@@ -94,8 +69,6 @@ def GPS():
             #print('Closed.. \n')
             dat = []
             f.close()
-            launch_time = datetime.datetime.now()
-            timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
 
             try:
                 urllib.request.urlopen('http://google.com', None, timeout=5.1)
@@ -103,8 +76,12 @@ def GPS():
                 gps_timestamp = ''
             except:
                 internet = 'NOINT_'
-                gps_timestamp = gpsTimestampFunc()
-
+                print('no internet identified')
+                gps_timestamp = gpsTimestampFunc(gps)
+                print('GPS timestamp function done')
+                
+            launch_time = datetime.datetime.now()
+            timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
             gpsPath = f'/home/pi/glinda_main/dataFiles/gps/{internet}{device_hostname}_gpsData_{timestr}{gps_timestamp}.csv'
             f = open(gpsPath,'a+')
             print('NEW GPS FILE')
@@ -115,9 +92,26 @@ def GPS():
     except:
         print('ERROR')
         pass
-
-
-
+    
+    
+    def gpsTimestampFunc(gps_obj):
+        gps_timestamp = 'None'
+        now = time()
+        while time()-now < 5:
+            if gps_obj.has_fix:
+                gps_obj.update()
+                gps_time = (f'{gps_obj.timestamp_utc.tm_hour}_{gps_obj.timestamp_utc.tm_min}_{gps_obj.timestamp_utc.tm_sec}')
+                # gps_time = datetime.datetime(gps.timestamp_utc.tm_year,\
+                #     gps.timestamp_utc.tm_mon,\
+                #     gps.timestamp_utc.tm_mday,\
+                #     gps.timestamp_utc.tm_hour,\
+                #     gps.timestamp_utc.tm_min,\
+                #     gps.timestamp_utc.tm_sec)  
+                # print(gps_time)
+                gps_timestamp = (f'_GPS_UTCtimestamp_{gps_time}')
+                return gps_timestamp                
+            else:
+                pass
 
 if __name__ == '__main__':
     GPS()
