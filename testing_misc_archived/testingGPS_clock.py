@@ -30,7 +30,7 @@ def GPS_clock_update():
 
     try:
         while 1:
-            gps.update()
+
             for i in range(1000):
                 gps.update()
                 if gps.has_fix:     #gps fix: 0=no, 1=yes, 2=differential fix
