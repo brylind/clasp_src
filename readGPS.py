@@ -32,7 +32,7 @@ def GPS():
 
     def check_internet():
         try:
-            _ = urllib.request.urlopen('https://google.com', None, timeout=5.1)
+            _ = urllib.request.urlopen('https://www.google.com', None, timeout=5.1)
             print('GOOGLE reached (there is internet)')
             return True
         except OSError:
