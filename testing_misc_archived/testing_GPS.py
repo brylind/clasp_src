@@ -9,7 +9,7 @@ def GPS():
     import socket
     import serial
     import urllib.request
-
+    ########################################
     device_hostname = socket.gethostname()
 
     def gpsTimestampFunc(gps_obj):
@@ -29,6 +29,18 @@ def GPS():
         # this gps timestamp will not change if the gps maintain fix. But, it can be used to find the offset between the
         # the GPS time and the system time (which will be way off without internet connection)
 
+    def check_internet():
+        try:
+            _ = urllib.request.urlopen('http://google.com', None, timeout=5.1)
+            print('GOOGLE reached (there is internet)')
+            return True
+        except OSError:
+            _ = urllib.request.urlopen('http://python.org', None, timeout=5.1)
+            print('GOOGLE ping failed, python.org succeeded')
+            return True
+        except Exception as e:
+            print(f'no internet, error: {e}')
+            return False
     
     uart = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=100)
     
@@ -41,12 +53,10 @@ def GPS():
     # Set update rate to once a second (1hz) which is what you typically want.
     gps.send_command(b"PMTK220,1000")
 
-
-    try:
-        urllib.request.urlopen('http://google.com', None, timeout=3.1)
+    if check_internet():
         internet = ''
         gps_timestamp = ''
-    except:
+    else:
         internet = 'NOINT_'
         gps_timestamp = gpsTimestampFunc(gps)
 
@@ -67,27 +77,16 @@ def GPS():
                     else:
                         dat.append([time(), 0, 0, -1, -1, 0])
                     sleep(1)
-                #print('Writing... \n')        
-            # if gps.has_fix:
-            #     gps.update()
-      
-            #     delta_t = (datetime.datetime.utcnow()-gps_time).total_seconds()
-            # else:
-            #     delta_t = 'N/A'
-            # f.write('Delta_t_sys_minus_gps_at_write' + ',' + str(delta_t) + '\n')
-
 
                 for d in dat:
                     f.write(str(d[0]) + ',' + str(d[1]) + ',' + str(d[2]) + ',' + str(d[3]) + ',' + str(d[4]) + ',' + str(d[5]) + '\n')
-                #print('Closed.. \n')
-            dat = []
+                dat = []    # TEST THIS, MAKE SURE THIS WORKS. Its supposed to clear dat to help ram out
             f.close()
 
-            try:
-                urllib.request.urlopen('http://google.com', None, timeout=3.1)
+            if check_internet():
                 internet = ''
                 gps_timestamp = ''
-            except:
+            else:
                 internet = 'NOINT_'
                 gps_timestamp = gpsTimestampFunc(gps)
 
