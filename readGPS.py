@@ -32,11 +32,11 @@ def GPS():
 
     def check_internet():
         try:
-            _ = urllib.request.urlopen('http://google.com', None, timeout=5.1)
+            _ = urllib.request.urlopen('https://google.com', None, timeout=5.1)
             print('GOOGLE reached (there is internet)')
             return True
         except OSError:
-            _ = urllib.request.urlopen('http://python.org', None, timeout=5.1)
+            _ = urllib.request.urlopen('https://www.python.org', None, timeout=5.1)
             print('GOOGLE ping failed, python.org succeeded')
             return True
         except Exception as e:
