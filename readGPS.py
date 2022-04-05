@@ -1,6 +1,8 @@
 # Mic Recording Script
 
 def GPS():
+    #################################
+    # import the goodies
     from time import sleep, time
     import adafruit_gps
     import datetime
@@ -10,8 +12,10 @@ def GPS():
     import serial
     import urllib.request
     ########################################
+    # device hostname is used all throughout this script
     device_hostname = socket.gethostname()
 
+############################ SUPPORTING NESTED FUNCTIONS ############################################
     def gpsTimestampFunc(gps_obj):
         gps_timestamp = 'None'
         now = time()
@@ -26,10 +30,6 @@ def GPS():
             else:
                 pass
 
-            # function used after checking for internet (if no internet, return the gps fix timestamp for a reference)
-        # this gps timestamp will not change if the gps maintain fix. But, it can be used to find the offset between the
-        # the GPS time and the system time (which will be way off without internet connection)
-
     def check_internet():
         try:
             _ = urllib.request.urlopen('http://google.com', None, timeout=5.1)
@@ -43,6 +43,8 @@ def GPS():
             print(f'no internet, error: {e}')
             return False
 
+####################################################################################
+    # now the fun begins
     uart = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=100)
 
     gps = adafruit_gps.GPS(uart, debug=False)  # Use UART/pyserial
@@ -69,8 +71,8 @@ def GPS():
 
     try:
         while 1:
-            f.write(
-                'Time_s' + ',' + 'Latitude' + ',' + 'Longitude' + ',' + 'Speed_kts' + ',' + 'GPS_fix' + ',' + 'Satellites' + '\n')
+            f.write('Time_s' + ',' + 'Latitude' + ',' + 'Longitude' + ',' + 'Speed_kts' + ',' + 'GPS_fix' +
+                    ',' + 'Satellites' + '\n')
             for j in range(12):  # the range(#'s) are the size of the output file (when multiplied)
                 for i in range(10):
                     gps.update()
@@ -82,10 +84,9 @@ def GPS():
                     sleep(1)
 
                 for d in dat:
-                    f.write(
-                        str(d[0]) + ',' + str(d[1]) + ',' + str(d[2]) + ',' + str(d[3]) + ',' + str(d[4]) + ',' + str(
-                            d[5]) + '\n')
-                dat = []  # TEST THIS, MAKE SURE THIS WORKS. Its supposed to clear dat to help ram out
+                    f.write(str(d[0]) + ',' + str(d[1]) + ',' + str(d[2]) + ',' + str(d[3]) + ',' +
+                            str(d[4]) + ',' + str(d[5]) + '\n')
+                dat = []  # help clear out ram so "dat" can be refilled with data
             f.close()
 
             if check_internet():
