@@ -71,7 +71,7 @@ def GPS():
         while 1:
             f.write(
                 'Time_s' + ',' + 'Latitude' + ',' + 'Longitude' + ',' + 'Speed_kts' + ',' + 'GPS_fix' + ',' + 'Satellites' + '\n')
-            for j in range(24):  # the range(#'s) are the size of the output file (when multiplied)
+            for j in range(12):  # the range(#'s) are the size of the output file (when multiplied)
                 for i in range(10):
                     gps.update()
                     if gps.has_fix:  # gps fix: 0=no, 1=yes, 2=differential fix
