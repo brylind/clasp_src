@@ -25,11 +25,11 @@ def mic():
 	ads = ADS.ADS1115(i2c)
 	sample_rate = 250
 	ads.data_rate = sample_rate		# 8, 16, 32, 64, 128, 250, 475, 860
-	ads.gain = 16
+	ads.gain = 1
 	ads.mode = Mode.CONTINUOUS
 
 	chan = AnalogIn(ads, ADS.P0, ADS.P1)		# differential voltage, channels 0 & 1 specified by JFA on his Github
-	s = 15		# seconds of recording
+	s = 20		# seconds of recording
 
 	# device_hostname = socket.gethostname()
 	# launch_time = datetime.datetime.now()
