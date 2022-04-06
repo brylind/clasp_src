@@ -10,8 +10,8 @@ from scipy.fft import rfft, rfftfreq
 
 
 #df_imported = pd.read_csv("~/Documents/OneDrive - Oklahoma A and M System/Research/Infrasound/GLINDA and Brandons work/testingmic.csv")
-#df_imported = pd.read_csv("~/Documents/Github/GLINDA2_testing/testing_misc_archived/testingmic.csv")
-df_imported = pd.read_csv("~/Documents/Github/GLINDA2_testing/testing_misc_archived/SYRINGE_attaching_initial8ml.csv")
+df_imported = pd.read_csv("~/Documents/Github/GLINDA2_testing/testing_misc_archived/testingmic.csv")
+#df_imported = pd.read_csv("~/Documents/Github/GLINDA2_testing/testing_misc_archived/SYRINGE_attaching_initial8ml.csv")
 mic_gain = 107  # gain-no units
 mic_sensitivity = .000022   #V/Pa
 
