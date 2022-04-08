@@ -38,35 +38,29 @@ def mic():
 	# 	f'{device_hostname}_micData_{timestr}.csv')
 	# f = open(micPath, 'a+')
 	dat = []
+	start = time()
 	try:
-		while True:
-			try:
-				urllib.request.urlopen('http://google.com')
-				internet = 1
-			except:
-				internet = -1
-			start = time()
-			while (time()-start) < s:
-				dat.append([time(), chan.voltage, internet])
-				sleep(1/sample_rate)
-			####################### used for testing
-			data = pd.DataFrame(dat,columns = ['Time','Signal','Internet_Status']) # used this for testing - BL
-			data.to_csv("testingmic.csv", header=['Time (s)', 'Signal (V)','Internet (1 is true)'])  # used for testing - BL
-			sleep(5)
+		while (time()-start) < s:
+			dat.append([time(), chan.voltage])
+			sleep(1/sample_rate)
+		####################### used for testing
+		data = pd.DataFrame(dat,columns = ['Time','Signal']) 	# used this for testing - BL
+		data.to_csv("testingmic.csv", header=['Time (s)', 'Signal (V)'])  # used for testing - BL
+		sleep(2)
 
-			os.system('git add "testingmic.csv"; git commit -m "added testingmic.csv"; git push')
-			quit()
-			###########################################
-			# f.write('Time_s' + ',' + 'Signal_V' + '\n')
-			# for d in dat:
-			# 	f.write(str(d[0]) + ',' + str(d[1]) + '\n')
-			dat = []
-			# f.close()
-			# launch_time = datetime.datetime.now()
-			# timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
-			# micPath = (f'/home/pi/glinda_main/dataFiles/mic/'
-			# 	f'{device_hostname}_micData_{timestr}.csv')
-			# f = open(micPath, 'a+')
+		os.system('git add "testingmic.csv"; git commit -m "added testingmic.csv"; git push')
+		quit()
+		###########################################
+		# f.write('Time_s' + ',' + 'Signal_V' + '\n')
+		# for d in dat:
+		# 	f.write(str(d[0]) + ',' + str(d[1]) + '\n')
+		dat = []
+		# f.close()
+		# launch_time = datetime.datetime.now()
+		# timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
+		# micPath = (f'/home/pi/glinda_main/dataFiles/mic/'
+		# 	f'{device_hostname}_micData_{timestr}.csv')
+		# f = open(micPath, 'a+')
 
 	except KeyboardInterrupt:
 		# f.close()
