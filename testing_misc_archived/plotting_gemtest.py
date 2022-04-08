@@ -33,16 +33,16 @@ print(sample_rate)
 yf = rfft(signal)
 xf = rfftfreq(N, 1/sample_rate)
 
-fig, (ax1, ax2) = plt.subplots(2)
-ax1.plot(time, signal)
-ax1.set_title('Raw Voltage vs Time')
-ax2.plot(time, pressure_signal)
-ax2.set_title('Pressure (Pa) (assuming sensitivity used is right) vs Time')
+# fig, (ax1, ax2) = plt.subplots(2)
+# ax1.plot(time, signal)
+# ax1.set_title('Raw Voltage vs Time')
+# ax2.plot(time, pressure_signal)
+# ax2.set_title('Pressure (Pa) (assuming sensitivity used is right) vs Time')
 
 
-#
-# plt.plot(time, signal)
-# plt.show()
+
+plt.plot(time, signal)
+plt.show()
 
 plt.semilogx(xf, np.abs(yf))
 #plt.plot(xf[100:-1], np.abs(yf)[100:-1])
