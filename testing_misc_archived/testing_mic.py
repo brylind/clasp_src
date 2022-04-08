@@ -29,7 +29,7 @@ def mic():
 	ads.mode = Mode.CONTINUOUS
 
 	chan = AnalogIn(ads, ADS.P0, ADS.P1)		# differential voltage, channels 0 & 1 specified by JFA on his Github
-	s = 20		# seconds of recording
+	s = 30		# seconds of recording
 
 	# device_hostname = socket.gethostname()
 	# launch_time = datetime.datetime.now()
