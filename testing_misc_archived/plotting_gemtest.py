@@ -20,7 +20,8 @@ mic_sensitivity = .000022   #V/Pa
 
 time = df_imported['Time (s)'].values
 signal_ugly = df_imported['Signal (V)'].values
-signal = signal_ugly-np.mean(signal_ugly)
+# signal = signal_ugly-np.mean(signal_ugly)
+signal = signal_ugly
 pressure_signal = signal*mic_gain/mic_sensitivity
 
 firsttime = time[1]
@@ -32,7 +33,7 @@ print(sample_rate)
 yf = rfft(signal)
 xf = rfftfreq(N, 1/sample_rate)
 
-plt.plot(time,signal)
+plt.plot(time, signal)
 plt.show()
 
 plt.semilogx(xf, np.abs(yf))
