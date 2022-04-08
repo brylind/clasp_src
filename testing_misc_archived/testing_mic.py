@@ -29,7 +29,7 @@ def mic():
 	ads.mode = Mode.CONTINUOUS
 
 	chan = AnalogIn(ads, ADS.P0, ADS.P1)		# differential voltage, channels 0 & 1 specified by JFA on his Github
-	s = 30		# seconds of recording
+	s = 60		# seconds of recording
 
 	# device_hostname = socket.gethostname()
 	# launch_time = datetime.datetime.now()
@@ -43,6 +43,7 @@ def mic():
 		while (time()-start) < s:
 			dat.append([time(), chan.voltage])
 			sleep(1/sample_rate)
+			print(time()-start)
 		####################### used for testing
 		data = pd.DataFrame(dat,columns = ['Time','Signal']) 	# used this for testing - BL
 		data.to_csv("testingmic.csv", header=['Time (s)', 'Signal (V)'])  # used for testing - BL
