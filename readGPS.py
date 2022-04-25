@@ -16,19 +16,19 @@ def GPS():
     device_hostname = socket.gethostname()
 
 ############################ SUPPORTING NESTED FUNCTIONS ############################################
-    def gpsTimestampFunc(gps_obj):
-        gps_timestamp = 'None'
-        now = time()
-        while time() - now < 5:
-            gps_obj.update()
-            if gps_obj.has_fix:
-                gps_obj.update()
-                gps_time = (
-                    f'{gps_obj.timestamp_utc.tm_hour}_{gps_obj.timestamp_utc.tm_min}_{gps_obj.timestamp_utc.tm_sec}')
-                gps_timestamp = f'_GPS_UTCtimestamp_{gps_time}'
-                return gps_timestamp
-            else:
-                pass
+    # def gpsTimestampFunc(gps_obj):
+    #     gps_timestamp = 'None'
+    #     now = time()
+    #     while time() - now < 5:
+    #         gps_obj.update()
+    #         if gps_obj.has_fix:
+    #             gps_obj.update()
+    #             gps_time = (
+    #                 f'{gps_obj.timestamp_utc.tm_hour}_{gps_obj.timestamp_utc.tm_min}_{gps_obj.timestamp_utc.tm_sec}')
+    #             gps_timestamp = f'_GPS_UTCtimestamp_{gps_time}'
+    #             return gps_timestamp
+    #         else:
+    #             pass
 
     def check_internet():
         try:
@@ -58,48 +58,52 @@ def GPS():
 
     if check_internet():
         internet = ''
-        gps_timestamp = ''
+        # gps_timestamp = ''
     else:
         internet = 'NOINT_'
-        gps_timestamp = gpsTimestampFunc(gps)
+        # gps_timestamp = gpsTimestampFunc(gps)
 
     launch_time = datetime.datetime.now()
     timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
-    gpsPath = f'/home/pi/glinda_main/dataFiles/gps/{internet}{device_hostname}_gpsData_{timestr}{gps_timestamp}.csv'
+    # gpsPath = f'/home/pi/glinda_main/dataFiles/gps/{internet}{device_hostname}_gpsData_{timestr}{gps_timestamp}.csv'
+    gpsPath = f'/home/pi/glinda_main/dataFiles/gps/{internet}{device_hostname}_gpsData_{timestr}.csv'
     f = open(gpsPath, 'a+')
     dat = []
 
     try:
         while 1:
             f.write('Time_s' + ',' + 'Latitude' + ',' + 'Longitude' + ',' + 'Speed_kts' + ',' + 'GPS_fix' +
-                    ',' + 'Satellites' + '\n')
+                    ',' + 'Satellites' + ',' + 'GPS_UTCtime_H_M_S' + '\n')
             for j in range(12):  # the range(#'s) are the size of the output file (when multiplied)
                 for i in range(10):
                     gps.update()
                     if gps.has_fix:  # gps fix: 0=no, 1=yes, 2=differential fix
+                        gps_time = (
+                            f'{gps.timestamp_utc.tm_hour}_{gps.timestamp_utc.tm_min}_{gps.timestamp_utc.tm_sec}')
                         dat.append(
-                            [time(), gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality, gps.satellites])
+                            [time(), gps.latitude, gps.longitude, gps.speed_knots, gps.fix_quality,
+                             gps.satellites, gps_time])
                     else:
-                        dat.append([time(), 0, 0, -1, -1, 0])
+                        dat.append([time(), 0, 0, -1, -1, 0, 0])
                     sleep(1)
 
                 for d in dat:
-                    f.write(str(d[0]) + ',' + str(d[1]) + ',' + str(d[2]) + ',' + str(d[3]) + ',' +
-                            str(d[4]) + ',' + str(d[5]) + '\n')
+                    f.write(str(d[0]) + ',' + str(d[1]) + ',' + str(d[2]) + ',' +
+                            str(d[3]) + ',' + str(d[4]) + ',' + str(d[5]) + ',' + d[6] + '\n')
                 dat = []  # help clear out ram so "dat" can be refilled with data
             f.close()
 
             if check_internet():
                 internet = ''
-                gps_timestamp = ''
+                # gps_timestamp = ''
             else:
                 internet = 'NOINT_'
-                gps_timestamp = gpsTimestampFunc(gps)
+                # gps_timestamp = gpsTimestampFunc(gps)
 
             launch_time = datetime.datetime.now()
             timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
-            gpsPath = (
-                f'/home/pi/glinda_main/dataFiles/gps/{internet}{device_hostname}_gpsData_{timestr}{gps_timestamp}.csv')
+            # gpsPath = f'/home/pi/glinda_main/dataFiles/gps/{internet}{device_hostname}_gpsData_{timestr}{gps_timestamp}.csv'
+            gpsPath = f'/home/pi/glinda_main/dataFiles/gps/{internet}{device_hostname}_gpsData_{timestr}.csv'
             f = open(gpsPath, 'a+')
             print('NEW GPS FILE')
 
