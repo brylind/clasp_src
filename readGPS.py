@@ -89,7 +89,7 @@ def GPS():
 
                 for d in dat:
                     f.write(str(d[0]) + ',' + str(d[1]) + ',' + str(d[2]) + ',' +
-                            str(d[3]) + ',' + str(d[4]) + ',' + str(d[5]) + ',' + d[6] + '\n')
+                            str(d[3]) + ',' + str(d[4]) + ',' + str(d[5]) + ',' + str(d[6]) + '\n')
                 dat = []  # help clear out ram so "dat" can be refilled with data
             f.close()
 
