@@ -54,7 +54,7 @@ def GPS():
     # gps.send_command(b"PMTK314,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0")
 
     # Set update rate to once a second (1hz) which is what you typically want.
-    gps.send_command(b"PMTK220,2000")
+    gps.send_command(b"PMTK220,10000")
 
     if check_internet():
         internet = ''
@@ -74,8 +74,8 @@ def GPS():
         while 1:
             f.write('Time_s' + ',' + 'Latitude' + ',' + 'Longitude' + ',' + 'Speed_kts' + ',' + 'GPS_fix' +
                     ',' + 'Satellites' + ',' + 'GPS_UTCtime_H_M_S' + '\n')
-            for j in range(12):  # the range(#'s) are the size of the output file (when multiplied)
-                for i in range(10):
+            for j in range(5):  # the range(#'s) are the size of the output file (when multiplied)
+                for i in range(12):
                     gps.update()
                     if gps.has_fix:  # gps fix: 0=no, 1=yes, 2=differential fix
                         gps_time = (
@@ -85,7 +85,7 @@ def GPS():
                              gps.satellites, gps_time])
                     else:
                         dat.append([time(), 0, 0, -1, -1, 0, 0])
-                    sleep(1)
+                    sleep(5)
 
                 for d in dat:
                     f.write(str(d[0]) + ',' + str(d[1]) + ',' + str(d[2]) + ',' +
