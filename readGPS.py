@@ -1,8 +1,24 @@
-# Mic Recording Script
-
+# Author: Bryce Lindsey (bryce.lindsey@okstate.edu)
+# Date: April 1 2022
+# Description: Script that records GPS data on GLINDA 2.0
+# ##############################################################################
+# ##############################################################################
+# ~~~~~~~~~~~~~~~~~~ DETAILED COMMENTS ~~~~~~~~~~~~~~~~~~
+# i) The update rate is somewhat irrelevant for this project, as GPS data isn't terribly crucial.
+# However, what is important is that when acquiring GPS data, make sure the update() method is
+# called AT LEAST twice per update period. For example, if the GPS module update rate is set to
+# 10000 (once every 10 seconds), you need to call "gps.update()" at least once every 5 seconds.
+# If not, the buffer will fill faster than you're emptying it and the GPS data will be
+# continuously written at a time earlier than you intend.
+# ii) Sleep for 4 seconds to provide a small overlap between data updated and data written.
+# This way, data will be written 2.5 times (10/4) per GPS update (see D.C. "i")
+# iii) The length of each GPS file will be:
+# sleep value x i full range x j full range. As of 4/27/2022, for example, the loop sleeps
+# for 4 seconds each iteration, i goes to 15, j goes to 5... so each file will be 300
+# seconds long
+# ##############################################################################
 def GPS():
-    #################################
-    # import the goodies
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~ import the goodies ~~~~~~~~~~~~~~~~~~~~~~~~~~~
     from time import sleep, time
     import adafruit_gps
     import datetime
@@ -11,61 +27,36 @@ def GPS():
     import socket
     import serial
     import urllib.request
-    ########################################
-    # device hostname is used all throughout this script
-    device_hostname = socket.gethostname()
-
-############################ SUPPORTING NESTED FUNCTIONS ############################################
-    # def gpsTimestampFunc(gps_obj):
-    #     gps_timestamp = 'None'
-    #     now = time()
-    #     while time() - now < 5:
-    #         gps_obj.update()
-    #         if gps_obj.has_fix:
-    #             gps_obj.update()
-    #             gps_time = (
-    #                 f'{gps_obj.timestamp_utc.tm_hour}_{gps_obj.timestamp_utc.tm_min}_{gps_obj.timestamp_utc.tm_sec}')
-    #             gps_timestamp = f'_GPS_UTCtimestamp_{gps_time}'
-    #             return gps_timestamp
-    #         else:
-    #             pass
-
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ SUPPORTING NESTED FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     def check_internet():
         try:
             _ = urllib.request.urlopen('https://www.google.com', None, timeout=5.1)
             print('GOOGLE reached (there is internet)')
             return True
-        # except OSError:
-        #     _ = urllib.request.urlopen('https://www.python.org', None, timeout=5.1)
-        #     print('GOOGLE ping failed, python.org succeeded')
-        #     return True
         except:
             print(f'no internet')
             return False
 
-####################################################################################
-    # now the fun begins
-    uart = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=100)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    gps = adafruit_gps.GPS(uart, debug=False)  # Use UART/pyserial
-    # Turn on the basic GGA and RMC info (what you typically want)
+    device_hostname = socket.gethostname()  # hostname is used for data storage
+    uart = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=100)
+    gps = adafruit_gps.GPS(uart, debug=False)  # define GPS object
+
+    # Turn on the basic GGA and RMC NMEA info (what you typically want)
     gps.send_command(b"PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
 
-    # gps.send_command(b"PMTK314,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0")
+    # --> DETAILED COMMENT "i"
+    gps.send_command(b"PMTK220,10000")  # set the update rate to once every 10 seconds
 
-    # Set update rate to once a second (1hz) which is what you typically want.
-    gps.send_command(b"PMTK220,10000")
-
-    if check_internet():
+    if check_internet():    # check for network status
         internet = ''
-        # gps_timestamp = ''
     else:
         internet = 'NOINT_'
-        # gps_timestamp = gpsTimestampFunc(gps)
 
     launch_time = datetime.datetime.now()
     timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
-    # gpsPath = f'/home/pi/glinda_main/dataFiles/gps/{internet}{device_hostname}_gpsData_{timestr}{gps_timestamp}.csv'
     gpsPath = f'/home/pi/glinda_main/dataFiles/gps/{internet}{device_hostname}_gpsData_{timestr}.csv'
     f = open(gpsPath, 'a+')
     dat = []
@@ -74,7 +65,8 @@ def GPS():
         while 1:
             f.write('Time_s' + ',' + 'Latitude' + ',' + 'Longitude' + ',' + 'Speed_kts' + ',' + 'GPS_fix' +
                     ',' + 'Satellites' + ',' + 'GPS_UTCtime_H_M_S' + '\n')
-            for j in range(5):  # the range(#'s) are the size of the output file (when multiplied)
+            # --> DETAILED COMMENT "iii"
+            for j in range(5):
                 for i in range(15):
                     gps.update()
                     if gps.has_fix:  # gps fix: 0=no, 1=yes, 2=differential fix
@@ -85,6 +77,7 @@ def GPS():
                              gps.satellites, gps_time])
                     else:
                         dat.append([time(), 0, 0, -1, -1, 0, 0])
+                    # --> DETAILED COMMENT "ii"
                     sleep(4)
 
                 for d in dat:
@@ -95,14 +88,10 @@ def GPS():
 
             if check_internet():
                 internet = ''
-                # gps_timestamp = ''
             else:
                 internet = 'NOINT_'
-                # gps_timestamp = gpsTimestampFunc(gps)
-
             launch_time = datetime.datetime.now()
             timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
-            # gpsPath = f'/home/pi/glinda_main/dataFiles/gps/{internet}{device_hostname}_gpsData_{timestr}{gps_timestamp}.csv'
             gpsPath = f'/home/pi/glinda_main/dataFiles/gps/{internet}{device_hostname}_gpsData_{timestr}.csv'
             f = open(gpsPath, 'a+')
             print('NEW GPS FILE')

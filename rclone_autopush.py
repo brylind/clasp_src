@@ -1,8 +1,15 @@
+# Author: Bryce Lindsey (bryce.lindsey@okstate.edu)
+# Date: April 1 2022
+# Description: Script that send data from GLINDA 2.0 to Google Drive
+# ##############################################################################
+# ##############################################################################
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~ import the goodies ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 import os
 import socket
 from time import sleep
-
-hname = socket.gethostname()
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+hname = socket.gethostname()  # get hostname for indexing
 mic_data_path = f"/home/pi/glinda_main/dataFiles/mic"
 gps_data_path = f"/home/pi/glinda_main/dataFiles/gps"
 mic_remote_loc = f"{hname}/{hname}_mic_data"
@@ -11,6 +18,7 @@ sleep(20)
 
 try:
     while True:
+        # move files using rclone (and a minimum age filter)
         comline_mic = f'rclone move "{mic_data_path}" "glinda_data:{mic_remote_loc}" --min-age 10m'
         os.system(comline_mic)
         os.system("echo mic data pushed to remote drive")

@@ -1,10 +1,9 @@
-# Author:   Brandon White (bcwhitecb@gmail.com)
+# Authors:   Bryce Lindsey (bryce.lindsey@okstate.edu), Brandon White
 # Date:     Feb 27, 2020
-# Edit:     Mar 27, 2020
+# Edit:     April 1, 2022
 # Desc:     Reads and logs data from onboard sensors (listed below). For use on
 #           Val Castor's storm chasing vehicle
 
-# does this show 3/15 9:10
 # General Import Statements
 import numpy as np
 from multiprocessing import *

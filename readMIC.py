@@ -1,14 +1,16 @@
-# Mic Recording Script
-#DOES THIS SHOW  - 3/11 2:55
+# Author: Bryce Lindsey (bryce.lindsey@okstate.edu)
+# Date: April 1 2022
+# Description: Script that records microphone data on GLINDA 2.0
+# ##############################################################################
+# ##############################################################################
 
 
 def mic():
+	# ~~~~~~~~~~~~~~~~~~~~~~~~~~~ import the goodies ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	from adafruit_ads1x15.analog_in import AnalogIn
 	from adafruit_ads1x15.ads1x15 import Mode
 	import adafruit_ads1x15.ads1115 as ADS
 	import pandas as pd
-
-
 	from time import time, sleep
 	import datetime
 	import board
@@ -16,8 +18,9 @@ def mic():
 	import socket
 	import sys
 	import urllib.request
+	# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-	# I'm using this line instead after setting the baudrate manually in /boot/config.txt
+	# Set the baudrate manually in /boot/config.txt
 	i2c = busio.I2C(board.SCL, board.SDA)
 
 	ads = ADS.ADS1115(i2c)
@@ -26,7 +29,7 @@ def mic():
 	ads.gain = 1
 	ads.mode = Mode.CONTINUOUS
 
-	chan = AnalogIn(ads, ADS.P0, ADS.P1)		# differential voltage, channels 0 & 1 specified by JFA on his Github
+	chan = AnalogIn(ads, ADS.P0, ADS.P1)  # differential voltage, channels 0 & 1 specified by JFA on his Github
 	s = 20		# seconds of recording
 
 	device_hostname = socket.gethostname()
@@ -47,9 +50,9 @@ def mic():
 			while (time()-start) < s:
 				dat.append([time(), chan.voltage, internet])
 				sleep(1/sample_rate)
-			############################################## used for testing
-			# data = pd.DataFrame(dat,columns = ['Time','Signal']) # used this for testing - BL
-			# data.to_csv("testingmic.csv", header=['Time (s)', 'Signal (V)'])  # used for testing - BL
+			##############################################	used for testing - BL
+			# data = pd.DataFrame(dat,columns = ['Time','Signal'])
+			# data.to_csv("testingmic.csv", header=['Time (s)', 'Signal (V)'])
 			# quit()
 			##################################################################
 			f.write('Time_s' + ',' + 'Signal_V' + ',' + 'Internet_status' + '\n')
