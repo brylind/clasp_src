@@ -8,7 +8,7 @@
 import os
 import socket
 from time import sleep
-from datetime import date
+import datetime
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 hname = socket.gethostname()  # get hostname for indexing
 mic_data_path = f"/home/pi/glinda_main/dataFiles/mic"
@@ -17,9 +17,9 @@ sleep(20)
 
 try:
     while True:
-        year = date.today().year
-        month = date.today().month
-        day = date.today().day
+        year = datetime.datetime.now().strftime("%Y")
+        month = datetime.datetime.now().strftime("%m")
+        day = datetime.datetime.now().strftime("%d")
         mic_remote_loc = f"{hname}/{hname}_mic_data/{year}/{month}/{day}"
         gps_remote_loc = f"{hname}/{hname}_gps_data/{year}/{month}/{day}"
 
