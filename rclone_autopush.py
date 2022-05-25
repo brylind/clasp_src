@@ -8,16 +8,21 @@
 import os
 import socket
 from time import sleep
+from datetime import date
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 hname = socket.gethostname()  # get hostname for indexing
 mic_data_path = f"/home/pi/glinda_main/dataFiles/mic"
 gps_data_path = f"/home/pi/glinda_main/dataFiles/gps"
-mic_remote_loc = f"{hname}/{hname}_mic_data"
-gps_remote_loc = f"{hname}/{hname}_gps_data"
 sleep(20)
 
 try:
     while True:
+        year = date.today().year
+        month = date.today().month
+        day = date.today().day
+        mic_remote_loc = f"{hname}/{hname}_mic_data/{year}/{month}/{day}"
+        gps_remote_loc = f"{hname}/{hname}_gps_data/{year}/{month}/{day}"
+
         # move files using rclone (and a minimum age filter)
         comline_mic = f'rclone move "{mic_data_path}" "glinda_data:{mic_remote_loc}" --min-age 10m'
         os.system(comline_mic)
