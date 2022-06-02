@@ -37,11 +37,11 @@ def mic():
 	timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
 	try:
 		urllib.request.urlopen('http://google.com', None, timeout=5.1)
-		internet = ''
+		internet = 'yes'
 	except:
-		internet = 'NOINT_'
+		internet = 'NO_INT'
 	micPath = (f'/home/pi/glinda_main/dataFiles/mic/'
-		f'{internet}{device_hostname}_micData_{timestr}.csv')
+		f'{device_hostname}_micData_{timestr}.csv')
 	f = open(micPath, 'a+')
 	dat = []
 	try:
@@ -64,11 +64,11 @@ def mic():
 			timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
 			try:
 				urllib.request.urlopen('http://google.com', None, timeout=5.1)
-				internet = ''
+				internet = 'yes'
 			except:
-				internet = 'NOINT_'
+				internet = 'NO_INT'
 			micPath = (f'/home/pi/glinda_main/dataFiles/mic/'
-				f'{internet}{device_hostname}_micData_{timestr}.csv')
+				f'{device_hostname}_micData_{timestr}.csv')
 			f = open(micPath, 'a+')			
 
 	except KeyboardInterrupt:
