@@ -15,7 +15,7 @@ def main():
 	s = 3	# seconds of recording
 
 	# dat=[['Time_s', 'accx_g','accy_g','accz_g']]
-	dat=0
+	dat=[]
 	# dat.append('Time_s'+','+'accx_g'+','+'accy_g'+','+'accz_g \n')
 	start = time()
 	t_end = time()+s
