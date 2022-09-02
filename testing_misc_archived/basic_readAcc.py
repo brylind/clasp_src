@@ -11,7 +11,7 @@ def main():
 
 	i2c = busio.I2C(board.SCL, board.SDA)
 	accel = adafruit_adxl34x.ADXL345(address=0x53, i2c=i2c)
-	accel.DataRate=3200
+	accel.DataRate=100
 	s = 3	# seconds of recording
 
 	# dat=[['Time_s', 'accx_g','accy_g','accz_g']]
