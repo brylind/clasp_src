@@ -33,55 +33,55 @@ def mic():
 
 # --------------------------------------------------------------------
 ## testing with writing directly to file (instead of temporarily storing in "dat")
-	# device_hostname = socket.gethostname()
-	# launch_time = datetime.datetime.now()
-	# timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
-	# # micPath = (f'/home/pi/glinda_main/dataFiles/mic/'
-	# # 	f'{device_hostname}_micData_{timestr}.csv')
-	# micPath = (os.path.join(cwd,
-	# 	f'TESTDATA_{device_hostname}_micData_{timestr}.csv'))
-	# f = open(micPath, 'a+')
-	# f.write('Time_s' + ',' + 'Signal_V' + '\n')
-	#
-	# start = time()
-	# try:
-	# 	while (time()-start) < s:
-	# 		f.write(str(time()) + ',' + str(chan.voltage) + '\n')
-	# 		sleep(1/sample_rate)
-	# 	f.close()
-	# except KeyboardInterrupt:
-	# 	# f.close()
-	# 	print('\n Done Writing \n')
-	# except:
-	# 	print(f'ERROR at {time()}')
-	# 	pass
+	device_hostname = socket.gethostname()
+	launch_time = datetime.datetime.now()
+	timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
+	# micPath = (f'/home/pi/glinda_main/dataFiles/mic/'
+	# 	f'{device_hostname}_micData_{timestr}.csv')
+	micPath = (os.path.join(cwd,
+		f'TESTDATA_{device_hostname}_micData_{timestr}.csv'))
+	f = open(micPath, 'a+')
+	f.write('Time_s' + ',' + 'Signal_V' + '\n')
 
-# --------------------------------------------------------------------
-
-
-# --------------------------------------------------------------------
-# testing with writing to a temporary variable first
-	dat = []
 	start = time()
 	try:
 		while (time()-start) < s:
-			dat.append([time(), chan.voltage])
+			f.write(str(time()) + ',' + str(chan.voltage) + '\n')
 			sleep(1/sample_rate)
-			
-		####################### used for testing
-		data = pd.DataFrame(dat,columns = ['Time','Signal']) 	# used this for testing - BL
-		data.to_csv("testingmic.csv", header=['Time_s', 'Signal_V'])  # used for testing - BL
-		sleep(2)
-
-		os.system('git add "testingmic.csv"; git commit -m "added testingmic.csv"; git push')
-		quit()
-
+		f.close()
 	except KeyboardInterrupt:
 		# f.close()
 		print('\n Done Writing \n')
 	except:
 		print(f'ERROR at {time()}')
 		pass
+
+# --------------------------------------------------------------------
+
+
+# --------------------------------------------------------------------
+# testing with writing to a temporary variable first
+# 	dat = []
+# 	start = time()
+# 	try:
+# 		while (time()-start) < s:
+# 			dat.append([time(), chan.voltage])
+# 			sleep(1/sample_rate)
+#
+# 		####################### used for testing
+# 		data = pd.DataFrame(dat,columns = ['Time','Signal']) 	# used this for testing - BL
+# 		data.to_csv("testingmic.csv", header=['Time_s', 'Signal_V'])  # used for testing - BL
+# 		sleep(2)
+#
+# 		os.system('git add "testingmic.csv"; git commit -m "added testingmic.csv"; git push')
+# 		quit()
+#
+# 	except KeyboardInterrupt:
+# 		# f.close()
+# 		print('\n Done Writing \n')
+# 	except:
+# 		print(f'ERROR at {time()}')
+# 		pass
 # --------------------------------------------------------------------
 
 if __name__ == '__main__':
