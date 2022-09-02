@@ -21,11 +21,12 @@ def main():
 	while time() < t_end:
 		dat.append([[time(), accel.acceleration[0], accel.acceleration[1], accel.acceleration[2]]])
 	print('Done Recording \n')
-	init_SR = 1/(dat[1][0]-dat[0][0])
-	total_SR = height(dat)/(dat[-1][0]-dat[0][0])
-	print(f'Total time recording took place: {dat[-1][0]-dat[0][0]}')
-	print(f'Sample rate for initial points: {init_SR} \n')
-	print(f'Sample rate for entire file: {total_SR}')
+	print(dat)
+	# init_SR = 1/(dat[1][0]-dat[0][0])
+	# total_SR = height(dat)/(dat[-1][0]-dat[0][0])
+	# print(f'Total time recording took place: {dat[-1][0]-dat[0][0]}')
+	# print(f'Sample rate for initial points: {init_SR} \n')
+	# print(f'Sample rate for entire file: {total_SR}')
 
 
 main()
