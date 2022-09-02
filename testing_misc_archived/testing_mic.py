@@ -46,8 +46,11 @@ def mic():
 	start = time()
 	try:
 		while (time()-start) < s:
-			f.write(str(time()) + ',' + str(chan.voltage) + '\n')
-			sleep(1/sample_rate)
+			if ads.conversion_complete():	# testing this
+				f.write(str(time()) + ',' + str(chan.voltage) + '\n')
+			else:
+				pass
+			# sleep(1/sample_rate)
 		f.close()
 	except KeyboardInterrupt:
 		# f.close()
