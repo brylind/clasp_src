@@ -67,7 +67,7 @@ def mic():
 		while (time()-start) < s:
 			dat.append([time(), chan.voltage])
 			sleep(1/sample_rate)
-			print(time()-start)
+			
 		####################### used for testing
 		data = pd.DataFrame(dat,columns = ['Time','Signal']) 	# used this for testing - BL
 		data.to_csv("testingmic.csv", header=['Time_s', 'Signal_V'])  # used for testing - BL
