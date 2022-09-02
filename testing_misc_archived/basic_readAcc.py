@@ -22,7 +22,7 @@ def main():
 	while time() < t_end:
 		dat.append([time(), accel.acceleration[0], accel.acceleration[1], accel.acceleration[2]])
 	print('Done Recording \n')
-	print(dat)
+	print(dat[0])
 	# init_SR = 1/(dat[1][0]-dat[0][0])
 	# total_SR = height(dat)/(dat[-1][0]-dat[0][0])
 	# print(f'Total time recording took place: {dat[-1][0]-dat[0][0]}')
