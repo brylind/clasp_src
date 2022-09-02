@@ -14,7 +14,7 @@ def main():
 	accel.DataRate=3200
 	s = 7	# seconds of recording
 
-	dat=[]
+	dat=[[]]
 	# dat.append('Time_s'+','+'accx_g'+','+'accy_g'+','+'accz_g \n')
 	start = time()
 	t_end = time()+s
