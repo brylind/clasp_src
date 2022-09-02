@@ -29,7 +29,7 @@ def mic():
 	ads.mode = Mode.CONTINUOUS
 
 	chan = AnalogIn(ads, ADS.P0, ADS.P1)		# differential voltage, channels 0 & 1 specified by JFA on his Github
-	s = 60		# seconds of recording
+	s = 10		# seconds of recording
 
 # --------------------------------------------------------------------
 ## testing with writing directly to file (instead of temporarily storing in "dat")
