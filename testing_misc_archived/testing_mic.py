@@ -38,7 +38,7 @@ def mic():
 	timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
 	# micPath = (f'/home/pi/glinda_main/dataFiles/mic/'
 	# 	f'{device_hostname}_micData_{timestr}.csv')
-	micPath = (os.path.join(cwd,
+	micPath = (os.path.join(cwd,'test_data',
 		f'TESTDATA_{device_hostname}_micData_{timestr}.csv'))
 	f = open(micPath, 'a+')
 	f.write('Time_s' + ',' + 'Signal_V' + '\n')
