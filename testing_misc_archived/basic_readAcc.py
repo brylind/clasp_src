@@ -5,13 +5,17 @@ import busio
 
 def main():
 
+	# dat = [[1,2,3,4]]
+	# dat.append([5,6,7,8])
+
+
 	i2c = busio.I2C(board.SCL, board.SDA)
 	accel = adafruit_adxl34x.ADXL345(address=0x53, i2c=i2c)
 	accel.DataRate=3200
 	s = 20	# seconds of recording
 
 	dat=[]
-	dat.append('Time_s'+','+'accx_g'+','+'accy_g'+','+'accz_g \n')
+	# dat.append('Time_s'+','+'accx_g'+','+'accy_g'+','+'accz_g \n')
 	start = time()
 	t_end = time()+s
 	while time() < t_end:
