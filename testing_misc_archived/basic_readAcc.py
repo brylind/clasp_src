@@ -11,11 +11,11 @@ def main():
 	s = 20	# seconds of recording
 
 	dat=[]
-	dat.append('Time_s'+','+'accx_g'+','+'accy_g'+','+'accz_g')
+	dat.append('Time_s'+','+'accx_g'+','+'accy_g'+','+'accz_g \n')
 	start = time()
 	t_end = time()+s
 	while time() < t_end:
-		dat.append(time(), accel.acceleration[0], accel.acceleration[1], accel.acceleration[2])
+		dat.append([time(), accel.acceleration[0], accel.acceleration[1], accel.acceleration[2]])
 	print('Done Recording \n')
 	init_SR = 1/(dat[2,1]-dat[1,1])
 	total_SR = height(dat)/(dat[-1,1]-dat[0,1])
