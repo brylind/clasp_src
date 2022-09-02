@@ -46,7 +46,7 @@ def mic():
 	start = time()
 	try:
 		while (time()-start) < s:
-			if ads._conversion_complete()==1	# testing this
+			if ads._conversion_complete()==1:	# testing this
 				f.write(str(time()) + ',' + str(chan.voltage) + '\n')
 			else:
 				pass
