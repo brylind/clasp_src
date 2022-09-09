@@ -11,8 +11,8 @@ import traceback
 def main():
 	i2c = busio.I2C(board.SCL, board.SDA)
 	accel = adafruit_adxl34x.ADXL345(address=0x53, i2c=i2c)
-	SR=800
-	accel.DataRate=SR
+	sample_rate=800
+	accel.DataRate=sample_rate
 	s = 30	# seconds of recording
 
 	device_hostname = socket.gethostname()
