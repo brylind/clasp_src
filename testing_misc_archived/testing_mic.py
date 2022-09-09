@@ -43,6 +43,8 @@ def mic():
 	f = open(micPath, 'a+')
 	f.write('Time_s' + ',' + 'Signal_V' + '\n')
 
+# TODO: try doing f.append instead of opening, writing, closing
+
 	start = time()
 	try:
 		while (time()-start) < s:
