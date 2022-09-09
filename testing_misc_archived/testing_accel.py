@@ -19,7 +19,7 @@ def main():
 	timestr = launch_time.strftime("%Y_%m_%d_%H_%M_%S")
 
 	cwd = os.getcwd()
-	micPath = (os.path.join(cwd, test_data,
+	micPath = (os.path.join(cwd, 'test_data',
 		f'TESTDATA_{device_hostname}_accData_{timestr}.csv'))
 	f = open(micPath, 'a+')
 	f.write('Time_s' + ',' + 'accx_mps2' + ',' + 'accy_mps2' + ',' + 'accz_mps2' '\n')
