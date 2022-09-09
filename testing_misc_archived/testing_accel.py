@@ -3,7 +3,7 @@ import os
 import board
 import busio
 import adafruit_adxl34x
-from time import time
+from time import time, sleep
 import socket
 import datetime
 import traceback
