@@ -6,6 +6,7 @@ import adafruit_adxl34x
 from time import time
 import socket
 import datetime
+import traceback
 
 def main():
 	i2c = busio.I2C(board.SCL, board.SDA)
@@ -36,7 +37,7 @@ def main():
 		# f.close()
 		print('\n Done Writing \n')
 	except:
-		print(f'ERROR at {time()}')
+		print(f'ERROR at {time()} \n {traceback.format_exc()}')
 		pass
 
 if __name__ == "__main__":
