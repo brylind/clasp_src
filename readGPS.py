@@ -16,6 +16,14 @@
 # sleep value x i full range x j full range. As of 4/27/2022, for example, the loop sleeps
 # for 4 seconds each iteration, i goes to 15, j goes to 5... so each file will be 300
 # seconds long
+#
+# RTC on the GPS module:
+# The Adafruit GPS Breakout has RTC capabilities, but it's not accessible. It is useful, though,
+# because after the first "fix" the GPS module will maintain time through its RTC (as long as a
+# proper battery is installed on the breakout).
+# This serves as a good sanity check in this script (comparing GPS time to the system time on the Pi)
+
+
 # ##############################################################################
 def GPS():
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~ import the goodies ~~~~~~~~~~~~~~~~~~~~~~~~~~~
