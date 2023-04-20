@@ -22,7 +22,7 @@ try:
         day = datetime.datetime.now().strftime("%d")
         mic_remote_loc = f"{hname}/{hname}_mic_data/{year}/{month}/{day}"
         # gps_remote_loc = f"{hname}/{hname}_gps_data/{year}/{month}/{day}"
-        gps_remote_loc = f"{hname}/{hname}_gps_data"
+        gps_remote_loc = f"{hname}/{hname}_gps_data/{year}/{month}/{day}"
 
         # move files using rclone (and a minimum age filter)
         comline_mic = f'rclone move "{mic_data_path}" "glinda_data:{mic_remote_loc}" --min-age 10m'
